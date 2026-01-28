@@ -1,0 +1,26 @@
+#game-title {
+    font-size: 48px;
+    -unity-font-style: bold;
+}
+
+#button-list {
+    width: 640px;
+    height: 100%;
+    padding: 16px;
+    align-items: center;
+}
+
+#button-list > * {
+    margin: 16px 0;
+}
+
+#button-list > Button {
+    width: 100%;
+    font-size: 32px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-width: 0;
+}
+
+#button-list > Button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
