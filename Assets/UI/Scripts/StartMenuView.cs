@@ -1,9 +1,17 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class StartMenuView
 {
+    public Action OpenSettings
+    {
+        set
+        {
+            settingsButton.clicked += value;
+        }
+    }
     private Button startButton;
     private Button settingsButton;
     private Button quitButton;

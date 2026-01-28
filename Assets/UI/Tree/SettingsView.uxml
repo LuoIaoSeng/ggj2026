@@ -1,25 +1,25 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/settingsview.uss?fileID=7433441132597879392&amp;guid=5632f2dbef73f4a47b90c6cdee28bd98&amp;type=3#settingsview" />
+    <Style src="project://database/Assets/UI/Uss/settingsview.uss?fileID=7433441132597879392&amp;guid=5632f2dbef73f4a47b90c6cdee28bd98&amp;type=3#settingsview" />
     <ui:VisualElement name="app" style="flex-grow: 1;">
         <ui:VisualElement name="container" style="flex-grow: 1;">
             <ui:VisualElement style="flex-grow: 1;">
                 <ui:Label tabindex="-1" text="图像设置" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                 <ui:VisualElement style="flex-grow: 1;">
-                    <ui:DropdownField label="分辨率" />
-                    <ui:Toggle label="全屏" />
+                    <ui:DropdownField label="分辨率" name="resolution-dropdown" />
+                    <ui:Toggle label="全屏" name="fullscreen-toggle" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1;">
                 <ui:Label tabindex="-1" text="声音设置" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                 <ui:VisualElement style="flex-grow: 1;">
-                    <ui:SliderInt label="总音量" high-value="100" />
-                    <ui:SliderInt label="游戏音量" high-value="100" />
-                    <ui:SliderInt label="音乐音量" high-value="100" />
+                    <ui:SliderInt label="总音量" high-value="100" name="global-volumn-slider" />
+                    <ui:SliderInt label="游戏音量" high-value="100" name="game-volumn-slider" />
+                    <ui:SliderInt label="音乐音量" high-value="100" name="music-volumn-slider" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="button-group" style="flex-grow: 1; height: 339px;">
-                <ui:Button text="取消" parse-escape-sequences="true" display-tooltip-when-elided="true" />
-                <ui:Button text="应用" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" />
+                <ui:Button text="取消" parse-escape-sequences="true" display-tooltip-when-elided="true" name="cancel-button" />
+                <ui:Button text="应用" parse-escape-sequences="true" display-tooltip-when-elided="true" name="apply-button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

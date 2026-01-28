@@ -10,6 +10,12 @@ public class StartMenuPresenter : MonoBehaviour
     private VisualElement root;
     private VisualElement startMenuView;
     private VisualElement settingsView;
+    
+    void ToggleSettings(bool b)
+    {
+        startMenuView.SetDisplay(!b);
+        settingsView.SetDisplay(b);
+    }
 
     void Start()
     {
@@ -20,5 +26,15 @@ public class StartMenuPresenter : MonoBehaviour
 
         StartMenuView startMenuViewPresenter = new StartMenuView(startMenuView);
         SettingsView settingsViewPresenter = new SettingsView(settingsView);
+
+        startMenuViewPresenter.OpenSettings = () =>
+        {
+            ToggleSettings(true);
+        };
+
+        settingsViewPresenter.CloseSettings = () =>
+        {
+            ToggleSettings(false);
+        };
     }
 }
