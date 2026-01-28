@@ -1,0 +1,41 @@
+#app {
+    padding: 32px;
+}
+
+#container {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    flex-direction: column;
+}
+
+#container > VisualElement {
+    width: 100%;
+    height: auto;
+}
+
+#container > VisualElement > Label {
+    font-size: 48px;
+    -unity-font-style: bold;
+}
+
+#container > VisualElement > VisualElement > * {
+    justify-content: space-between;
+}
+
+#container > VisualElement > VisualElement Label {
+    font-size: 32px;
+    -unity-font-style: bold;
+}
+
+#button-group {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#button-group > Button {
+    font-size: 32px;
+    margin: 0 16px;
+    padding: 12px 48px;
+    -unity-font-style: bold;
+    align-self: flex-end;
+}
