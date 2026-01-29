@@ -10,6 +10,7 @@ public class ScreenFader : MonoBehaviour
     {
         VisualElement root = fadeScreen.rootVisualElement;
         canvas = root.Q("canvas");
+        FadeOut(0);
     }
     public void FadeIn(float duration)
     {
