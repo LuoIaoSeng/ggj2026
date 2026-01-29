@@ -5,16 +5,19 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameInstance
+  - Enemy
+  - VirtualCamera
+  - CameraPosition
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
+  - R
+  - G
+  - B
   - 
   - 
   - 
