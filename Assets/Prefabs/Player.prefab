@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3654984824102475850}
-  - component: {fileID: 6306962514512646342}
   - component: {fileID: 4292755085281472817}
+  - component: {fileID: 6306962514512646342}
+  - component: {fileID: 4657379609475040343}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -35,25 +36,6 @@ Transform:
   - {fileID: 8860147953816836830}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6306962514512646342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4222476331751212478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b63c32b9be992b4fbffe4cd7d95130e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 4292755085281472817}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
-  speed: 5
-  jumpForce: 8
-  grounded: 0
 --- !u!50 &4292755085281472817
 Rigidbody2D:
   serializedVersion: 4
@@ -81,6 +63,39 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6306962514512646342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222476331751212478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b63c32b9be992b4fbffe4cd7d95130e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 4292755085281472817}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  speed: 5
+  jumpForce: 10
+  grounded: 0
+  enableInput: 1
+--- !u!114 &4657379609475040343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222476331751212478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0d815d7c811e44bb62bb1b89f21376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hud: {fileID: 0}
 --- !u!1 &5354129150107739590
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +255,7 @@ Transform:
   m_GameObject: {fileID: 7796924262074330414}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.5573256, z: -10}
+  m_LocalPosition: {x: 0, y: 5.335989, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
