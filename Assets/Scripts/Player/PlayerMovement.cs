@@ -10,9 +10,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 5;
     [SerializeField] private float jumpForce = 8;
     public bool grounded;
+    public bool enableInput = true;
     void Update()
     {
-        grounded = Physics2D.OverlapCircle(transform.position, 0.1f, groundMask);
+        if (!enableInput)
+            return;
+        grounded = Physics2D.OverlapCircle(transform.position, 0.01f, groundMask);
         if (InputController.Jump)
         {
             Jump();
@@ -20,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!enableInput)
+            return;
         Move();
     }
     void Move()
@@ -30,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (grounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpForce);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             grounded = false;
         }
     }
