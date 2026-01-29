@@ -24,6 +24,8 @@ public class HUD : MonoBehaviour
         blueButton = root.Q<Button>("b-button");
 
         redButton.clicked += TriggerRed;
+        greenButton.clicked += TriggerGreen;
+        blueButton.clicked += TriggerBlue;
     }
 
     private async void Trigger(Button button, Vector3 color)
