@@ -76,8 +76,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (dashed)
             return;
-        transform.DOMoveX(transform.position.x + dashDistance * direction, 0.3f)
-        .SetEase(Ease.Linear);
+        // if (Physics2D.Raycast(transform.position, Vector2.right * direction, dashDistance + 0.5f, groundMask))
+        //     return;
+        transform
+            .DOMoveX(transform.position.x + dashDistance * direction, 0.3f)
+            .SetEase(Ease.Linear);
         dashed = true;
         await Task.Delay(1000);
         dashed = false;
