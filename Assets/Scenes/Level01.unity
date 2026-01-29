@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 28244140}
   - component: {fileID: 28244139}
   - component: {fileID: 28244138}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8a3a63c1d60e840a4d25dd19ad9094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAbility: {fileID: 0}
 --- !u!1 &763150045
 GameObject:
   m_ObjectHideFlags: 0
