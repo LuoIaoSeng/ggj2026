@@ -16,6 +16,7 @@ public class InputController
     public static bool GreenKeyDown => Input.GetKeyDown(KeyCode.G);
     public static bool BlueKeyDown => Input.GetKeyDown(KeyCode.B);
     public static bool Jump => Input.GetKeyDown(KeyCode.W);
+    public static bool Squat => Input.GetKey(KeyCode.S);
     public static bool Interact => Input.GetButtonDown("Jump");
     public static bool Dash => Input.GetKey(KeyCode.LeftShift);
 }

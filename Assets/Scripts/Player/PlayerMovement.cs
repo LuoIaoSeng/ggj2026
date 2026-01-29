@@ -20,6 +20,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!enableInput)
             return;
+        var groundHit = Physics2D.OverlapCircle(transform.position, 0.01f, groundMask);
+        if (groundHit)
+        {
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
+        }
         var moveVector = InputController.MoveVector;
         if (moveVector.x > 0)
         {
@@ -29,11 +38,22 @@ public class PlayerMovement : MonoBehaviour
         {
             direction = -1;
         }
-        grounded = Physics2D.OverlapCircle(transform.position, 0.01f, groundMask);
+        if (InputController.Squat)
+        {
+            if (groundHit)
+            {
+                var twoWayStructure = groundHit.GetComponent<TwoWayStructure>();
+                if (twoWayStructure)
+                {
+                    twoWayStructure.ToggleCollider(false);
+                }
+            }
+        }
         if (InputController.Jump)
         {
             Jump();
         }
+
     }
     void FixedUpdate()
     {
