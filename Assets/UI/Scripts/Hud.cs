@@ -10,8 +10,8 @@ public class HUD : MonoBehaviour
     Button greenButton;
     Button blueButton;
     bool isTriggering = false;
-    int duration = 5;
-    int cooldown = 2;
+    public int abilityDuration;
+    public int abilityCooldown;
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class HUD : MonoBehaviour
         blueButton.clicked += TriggerBlue;
     }
 
-    private async void Trigger(Button button, Vector3 color)
+    private async void Trigger(Button button, Vector3 color, int duration, int cooldown)
     {
         if (button.ClassListContains("active") || button.ClassListContains("cooldown") || isTriggering)
             return;
@@ -59,14 +59,14 @@ public class HUD : MonoBehaviour
 
     public void TriggerRed()
     {
-        Trigger(redButton, new Vector3(1, 0, 0));
+        Trigger(redButton, new Vector3(1, 0, 0), abilityDuration, abilityCooldown);
     }
     public void TriggerGreen()
     {
-        Trigger(greenButton, new Vector3(0, 1, 0));
+        Trigger(greenButton, new Vector3(0, 1, 0), abilityDuration, abilityCooldown);
     }
     public void TriggerBlue()
     {
-        Trigger(blueButton, new Vector3(0, 0, 1));
+        Trigger(blueButton, new Vector3(0, 0, 1), abilityDuration, abilityCooldown);
     }
 }
