@@ -161,7 +161,6 @@ MonoBehaviour:
   animCrouch: Crouch
   animCrouchWalk: CrouchWalk
   animDash: Dash
-  crouchKey: 115
   dashKey: 304
   moveThreshold: 0.1
 --- !u!50 &593697796
@@ -201,7 +200,7 @@ Animator:
   m_GameObject: {fileID: 593697792}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8edb106d82b8160488a6aeb27e41f209, type: 2}
+  m_Controller: {fileID: 9100000, guid: f4c651793973efa4eaa60e3327584d24, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -253,7 +252,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 886924921, guid: 81280aad398f0ac4f9152f2ce9ddf499, type: 3}
+  m_Sprite: {fileID: 1381400198, guid: 1f53e7054731e8340bc21a17076c2f0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -731,7 +730,7 @@ Transform:
   m_GameObject: {fileID: 1764644400}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.66, y: 2.85, z: 0}
+  m_LocalPosition: {x: 10.66, y: 3.56, z: 0}
   m_LocalScale: {x: 9.595544, y: 1.8991, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
