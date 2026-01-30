@@ -10,11 +10,19 @@ public class HUD : MonoBehaviour
     Button greenButton;
     Button blueButton;
     bool isTriggering = false;
-    int duration = 5;
-    int cooldown = 2;
+    public int abilityDuration;
+    public int abilityCooldown;
+    GameObject[] redObjects;
 
     void Start()
     {
+
+        redObjects = GameObject.FindGameObjectsWithTag("R");
+
+        foreach (var gameObject in redObjects)
+        {
+            Debug.Log(gameObject.GetComponent<SpriteRenderer>());
+        }
 
         screenFilter = GameObject.Find("ScreenFilter").GetComponent<ScreenFilter>();
 
@@ -28,10 +36,17 @@ public class HUD : MonoBehaviour
         blueButton.clicked += TriggerBlue;
     }
 
-    private async void Trigger(Button button, Vector3 color)
+    private async void Trigger(Button button, Vector3 color, GameObject[] gameObjects, int duration, int cooldown)
     {
         if (button.ClassListContains("active") || button.ClassListContains("cooldown") || isTriggering)
             return;
+
+        foreach (var gameObject in gameObjects)
+        {
+            var spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            var originColor = spriteRenderer.color;
+            spriteRenderer.color = new Color(originColor.r, originColor.g, originColor.b, 0.2f);
+        }
 
         isTriggering = true;
         string originalText = button.text;
@@ -53,20 +68,27 @@ public class HUD : MonoBehaviour
             button.text = $"{i}";
             await Task.Delay(1000);
         }
+
+        foreach (var gameObject in gameObjects)
+        {
+            var spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            var originColor = spriteRenderer.color;
+            spriteRenderer.color = new Color(originColor.r, originColor.g, originColor.b, 1);
+        }
         button.text = originalText;
         button.RemoveFromClassList("cooldown");
     }
 
     public void TriggerRed()
     {
-        Trigger(redButton, new Vector3(1, 0, 0));
+        Trigger(redButton, new Vector3(1, 0, 0), redObjects, abilityDuration, abilityCooldown);
     }
     public void TriggerGreen()
     {
-        Trigger(greenButton, new Vector3(0, 1, 0));
+        Trigger(greenButton, new Vector3(0, 1, 0), redObjects, abilityDuration, abilityCooldown);
     }
     public void TriggerBlue()
     {
-        Trigger(blueButton, new Vector3(0, 0, 1));
+        Trigger(blueButton, new Vector3(0, 0, 1), redObjects, abilityDuration, abilityCooldown);
     }
 }

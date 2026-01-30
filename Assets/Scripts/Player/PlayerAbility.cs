@@ -6,9 +6,13 @@ public class PlayerAbility : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private HUD hud;
+    public int duration = 5;
+    public int cooldown = 2;
     void Start()
     {
         hud = GameObject.Find("HUD").GetComponent<HUD>();
+        hud.abilityDuration = duration;
+        hud.abilityCooldown = cooldown;
     }
 
     void Update()
