@@ -11,6 +11,8 @@ public class PlayerAbility : MonoBehaviour
     void Start()
     {
         hud = GameObject.Find("HUD").GetComponent<HUD>();
+        hud.abilityDuration = duration;
+        hud.abilityCooldown = cooldown;
     }
 
     void Update()

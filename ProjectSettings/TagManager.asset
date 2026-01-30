@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameInstance
-  - Enemy
   - VirtualCamera
   - CameraPosition
+  - R
   layers:
   - Default
   - TransparentFX
@@ -15,9 +15,9 @@ TagManager:
   - Ground
   - Water
   - UI
-  - R
-  - G
-  - B
+  - Enemy
+  - 
+  - 
   - 
   - 
   - 
