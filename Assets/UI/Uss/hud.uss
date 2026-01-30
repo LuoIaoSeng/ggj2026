@@ -1,0 +1,45 @@
+#container {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#footer {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: flex-end;
+    border-top-width: 4px;
+    border-top-color: #ddd;
+    background-color: #666;
+}
+
+#button-list {
+    flex-direction: row;
+    padding: 16px;
+}
+
+#button-list Button {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+    margin: 0 16px;
+    border-radius: 32px;
+}
+
+#button-list Button.cooldown {
+    opacity: 0.5;
+}
+
+#r-button {
+    background-color: rgb(240, 61, 61);
+}
+
+#g-button {
+    background-color: rgb(64, 216, 64);
+}
+
+#b-button {
+    background-color: rgb(80, 118, 245);
+}
