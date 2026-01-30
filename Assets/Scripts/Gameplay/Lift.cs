@@ -32,6 +32,8 @@ public class Lift : MonoBehaviour
         if (InputController.Interact && player && !isMoving)
         {
             var playerMovement = player.GetComponent<PlayerMovement>();
+            var rb = playerMovement.GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
             playerMovement.enableInput = false;
             isMoving = true;
 

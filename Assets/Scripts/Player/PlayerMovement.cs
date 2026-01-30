@@ -53,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleInput()
     {
-        Debug.Log(IsGrounded);
         if (InputController.Jump && IsGrounded && !IsCrouching)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
