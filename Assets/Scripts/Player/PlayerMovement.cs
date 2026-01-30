@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,26 +7,26 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [Tooltip("×ßÂ·ËÙ¶È")]
+    [Tooltip("èµ°è·¯é€Ÿåº¦")]
     public float walkSpeed = 5f;
-    [Tooltip("ÌøÔ¾Á¦¶È")]
+    [Tooltip("è·³è·ƒåŠ›åº¦")]
     public float jumpForce = 10f;
-    [Tooltip("ÏÂ¶×Ê±µÄËÙ¶È±¶ÂÊ (0-1)")]
+    [Tooltip("ä¸‹è¹²æ—¶çš„é€Ÿåº¦å€ç‡ (0-1)")]
     public float crouchSpeedMultiplier = 0.5f;
 
     [Header("Detection Settings")]
-    [Tooltip("½ÇÉ«½Åµ×")]
+    [Tooltip("è§’è‰²è„šåº•")]
     public Transform groundCheck;
-    [Tooltip("½ÇÉ«Í·¶¥")]
+    [Tooltip("è§’è‰²å¤´é¡¶")]
     public Transform ceilingCheck;
     public float checkRadius = 0.2f;
-    [Tooltip("µØÃæ/ÕÏ°­ÎïÍ¼²ã")]
+    [Tooltip("åœ°é¢/éšœç¢ç‰©å›¾å±‚")]
     public LayerMask groundLayer;
 
     [Header("State")]
     [SerializeField] public bool isInputEnabled = true;
 
-    // ¶ÔÍâ¹«¿ª×´Ì¬£¬¹© Animation ½Å±¾¶ÁÈ¡
+    // å¯¹å¤–å…¬å¼€çŠ¶æ€ï¼Œä¾› Animation è„šæœ¬è¯»å–
     public bool IsCrouching { get; private set; }
     public bool IsGrounded { get; private set; }
 
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // --- ĞŞ¸Äµã 2: É¾³ıÁËËùÓĞ Collider ±äÁ¿ºÍ»ñÈ¡´úÂë ---
+        // --- ä¿®æ”¹ç‚¹ 2: åˆ é™¤äº†æ‰€æœ‰ Collider å˜é‡å’Œè·å–ä»£ç  ---
     }
 
     private void Update()
@@ -56,17 +56,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleInput()
     {
-        // ÌøÔ¾Âß¼­
+        // è·³è·ƒé€»è¾‘
         if (Input.GetKeyDown(KeyCode.W) && IsGrounded && !IsCrouching)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        // --- ĞŞ¸Äµã 3: Ö»¼ÆËã×´Ì¬£¬²»ĞŞ¸ÄÅö×²Ìå ---
+        // --- ä¿®æ”¹ç‚¹ 3: åªè®¡ç®—çŠ¶æ€ï¼Œä¸ä¿®æ”¹ç¢°æ’ä½“ ---
         bool wantsToCrouch = Input.GetKey(KeyCode.S);
 
-        // Í·¶¥¼ì²âÂß¼­£ºÈç¹ûËÉ¿ªSµ«Í·¶¥ÓĞ¶«Î÷£¬±£³Ö¶×ÏÂ
+        // å¤´é¡¶æ£€æµ‹é€»è¾‘ï¼šå¦‚æœæ¾å¼€Sä½†å¤´é¡¶æœ‰ä¸œè¥¿ï¼Œä¿æŒè¹²ä¸‹
         //if (!wantsToCrouch && IsCrouching)
         //{
         //    if (Physics2D.OverlapCircle(ceilingCheck.position, checkRadius, groundLayer))
@@ -76,19 +76,19 @@ public class PlayerMovement : MonoBehaviour
         //}
         if (!wantsToCrouch && IsCrouching)
         {
-            // °ÑÔ­À´µÄ Physics2D.OverlapCircle ¸Ä³ÉÕâÑùÀ´µ÷ÊÔ£º
+            // æŠŠåŸæ¥çš„ Physics2D.OverlapCircle æ”¹æˆè¿™æ ·æ¥è°ƒè¯•ï¼š
             Collider2D hit = Physics2D.OverlapCircle(ceilingCheck.position, checkRadius, groundLayer);
             if (hit != null)
             {
-                Debug.Log("Í·¶¥¼ì²âµ½ÁËÕÏ°­Îï£º" + hit.name); // <--- ¿´¿ØÖÆÌ¨Êä³öÊ²Ã´Ãû×Ö
+                Debug.Log("å¤´é¡¶æ£€æµ‹åˆ°äº†éšœç¢ç‰©ï¼š" + hit.name); // <--- çœ‹æ§åˆ¶å°è¾“å‡ºä»€ä¹ˆåå­—
                 wantsToCrouch = true;
             }
         }
 
-        // ¸üĞÂ×´Ì¬
+        // æ›´æ–°çŠ¶æ€
         IsCrouching = wantsToCrouch;
 
-        // --- ĞŞ¸Äµã 4: É¾³ıÁË PerformCrouch() µ÷ÓÃ ---
+        // --- ä¿®æ”¹ç‚¹ 4: åˆ é™¤äº† PerformCrouch() è°ƒç”¨ ---
     }
 
     private void Move()
