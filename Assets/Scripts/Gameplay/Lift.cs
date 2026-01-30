@@ -11,7 +11,7 @@ public class Lift : MonoBehaviour
             if(collision.tag == "Player")
             {
                 var playerMovement = collision.GetComponent<PlayerMovement>();
-                playerMovement.enableInput = false;
+              
             }
         }
     }
