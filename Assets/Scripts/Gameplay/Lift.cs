@@ -32,7 +32,9 @@ public class Lift : MonoBehaviour
         if (InputController.Interact && player && !isMoving)
         {
             var playerMovement = player.GetComponent<PlayerMovement>();
-            playerMovement.isInputEnabled = false;
+            var rb = playerMovement.GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
+            playerMovement.enableInput = false;
             isMoving = true;
 
             var temp = floor + (dir == "up" ? 1 : -1);
@@ -51,7 +53,7 @@ public class Lift : MonoBehaviour
                 playerMovement.transform.DOMoveY(floorTransforms[floor].position.y, 2);
                 liftSprite.transform.DOMoveY(floorTransforms[floor].position.y + 1.5f, 2).OnComplete(() =>
                 {
-                    playerMovement.isInputEnabled = true;
+                    playerMovement.enableInput = true;
                     isMoving = false;
                 });
             });
