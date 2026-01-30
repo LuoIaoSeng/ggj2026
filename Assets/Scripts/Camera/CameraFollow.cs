@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [Header("¸úËæÄ¿±ê")]
+    [Header("è·Ÿéšç›®æ ‡")]
     public Transform target;
 
-    [Header("Æ½»¬²ÎÊı£¨ÖµÔ½Ğ¡Ô½Æ½»¬£©")]
+    [Header("å¹³æ»‘å‚æ•°ï¼ˆå€¼è¶Šå°è¶Šå¹³æ»‘ï¼‰")]
     [Range(0, 1)]
     public float smoothSpeed = 0.125f;
 
-    [Header("Î»ÖÃÆ«ÒÆ")]
+    [Header("ä½ç½®åç§»")]
     public Vector3 offset = new Vector3(0, 0, -10);
 
     void Start()
@@ -25,7 +25,7 @@ public class CameraFollow : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("CameraFollow: Î´ÕÒµ½ Tag Îª 'Player' µÄÎïÌå£¬Çë¼ì²éÉèÖÃ");
+                Debug.LogWarning("CameraFollow: æœªæ‰¾åˆ° Tag ä¸º 'Player' çš„ç‰©ä½“ï¼Œè¯·æ£€æŸ¥è®¾ç½®");
             }
         }
     }

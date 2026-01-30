@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1182b42a5cf20664b90e374f3d2cfea8
+guid: 1f53e7054731e8340bc21a17076c2f0d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,8 +46,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,54 +97,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Crouch_2_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1440
-        width: 460
-        height: 480
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45c7f62a7ace5dc49ad204750a05ba52
-      internalID: 1959856246
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crouch_2_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 960
-        width: 460
-        height: 480
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40e50c05954c93e4398d94b088360704
-      internalID: 584368218
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crouch_2_2
+      name: Walk_3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 480
-        width: 460
+        width: 440
         height: 480
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -153,19 +111,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc5409a602333dd46b66f3524c36d7e5
-      internalID: 1276457078
+      spriteID: 4ba765c264c3247428e52d07e966a078
+      internalID: 1381400198
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crouch_2_3
+      name: Walk_3_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 460
+        x: 440
+        y: 480
+        width: 440
         height: 480
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -174,8 +132,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8996f48e7e544644095224106b77458e
-      internalID: 1686936785
+      spriteID: 1c789663c31c0404ab6f3d9b5f26634c
+      internalID: 465158062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_3_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 440
+        height: 480
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeca669ea303b204dacc94b5b0882b44
+      internalID: -1658901542
       vertices: []
       indices: 
       edges: []
@@ -184,17 +163,16 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Crouch_2_0: 1959856246
-      Crouch_2_1: 584368218
-      Crouch_2_2: 1276457078
-      Crouch_2_3: 1686936785
+      Walk_3_0: 1381400198
+      Walk_3_1: 465158062
+      Walk_3_2: -1658901542
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
