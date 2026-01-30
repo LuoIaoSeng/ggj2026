@@ -1,18 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Lift : MonoBehaviour
 {
-    void OnTriggerStay2D(Collider2D collision)
+    [SerializeField] private List<Transform> floorTransforms;
+    [SerializeField] private int floor;
+    [SerializeField] private string dir;
+    [SerializeField] private int initFloor;
+    [SerializeField] private Transform liftSprite;
+    private Collider2D player;
+    private bool isMoving = false;
+    void Start()
     {
-        if(InputController.Interact)
+        floor = initFloor;
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
         {
-            if(collision.tag == "Player")
+            player = collision;
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        player = null;
+    }
+    void Update()
+    {
+        if (InputController.Interact && player && !isMoving)
+        {
+            var playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement.isInputEnabled = false;
+            isMoving = true;
+
+            var temp = floor + (dir == "up" ? 1 : -1);
+            if (temp == floorTransforms.Count)
             {
-                var playerMovement = collision.GetComponent<PlayerMovement>();
-              
+                dir = "down";
             }
+            else if (temp == -1)
+            {
+                dir = "up";
+            }
+            floor = floor + (dir == "up" ? 1 : -1);
+            playerMovement.transform.DOMoveX(floorTransforms[floor].position.x, 0.5f)
+            .OnComplete(() =>
+            {
+                playerMovement.transform.DOMoveY(floorTransforms[floor].position.y, 2);
+                liftSprite.transform.DOMoveY(floorTransforms[floor].position.y + 1.5f, 2).OnComplete(() =>
+                {
+                    playerMovement.isInputEnabled = true;
+                    isMoving = false;
+                });
+            });
         }
     }
 }

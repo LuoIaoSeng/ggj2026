@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
 
     [Header("State")]
-    [SerializeField] private bool isInputEnabled = true;
+    [SerializeField] public bool isInputEnabled = true;
 
     // 对外公开状态，供 Animation 脚本读取
     public bool IsCrouching { get; private set; }

@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 716751951902555260}
   - component: {fileID: 1135865964851255826}
   - component: {fileID: 2977535623168349781}
+  - component: {fileID: 2910729539496232279}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -139,8 +140,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 33093257
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 1381400198, guid: 1f53e7054731e8340bc21a17076c2f0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -277,3 +278,18 @@ MonoBehaviour:
   animDash: Dash
   dashKey: 304
   moveThreshold: 0.1
+--- !u!114 &2910729539496232279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7723118898239484635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0d815d7c811e44bb62bb1b89f21376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hud: {fileID: 0}
+  duration: 5
+  cooldown: 2

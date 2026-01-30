@@ -9,7 +9,7 @@ public class PlayerAnimation : MonoBehaviour
     [Header("Animation State Names")]
     public string animIdle = "Stand";
     public string animWalk = "Walk";
-    public string animCrouch = "Crouch"; // È·±£ÄãÔÚ Animator Àï¹´Ñ¡ÁËÕâ¸ö×´Ì¬µÄ Speed Multiplier
+    public string animCrouch = "Crouch"; // È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Animator ï¿½ï¹´Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ Speed Multiplier
     public string animCrouchWalk = "CrouchWalk";
     public string animDash = "Dash";
 
@@ -31,8 +31,8 @@ public class PlayerAnimation : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         movement = GetComponent<PlayerMovement>();
 
-        // ³õÊ¼»¯È·±£ËÙ¶È²ÎÊý´æÔÚ
-        animator.speed = 1f; // Ç¿ÖÆÖØÖÃÈ«¾ÖËÙ¶ÈÎªÕýÊý£¬Ïû³ý±¨´í
+        // ï¿½ï¿½Ê¼ï¿½ï¿½È·ï¿½ï¿½ï¿½Ù¶È²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        animator.speed = 1f; // Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½Ù¶ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
     void Update()
@@ -40,45 +40,45 @@ public class PlayerAnimation : MonoBehaviour
         bool isMoving = Mathf.Abs(rb.velocity.x) > moveThreshold;
         bool isDashing = Input.GetKey(dashKey);
 
-        // »ñÈ¡Âß¼­²ã×´Ì¬
+        // ï¿½ï¿½È¡ï¿½ß¼ï¿½ï¿½ï¿½×´Ì¬
         bool isCrouching = movement.IsCrouching;
         bool isGrounded = movement.IsGrounded;
 
-        // ¼ì²âËÉ¿ª S ¼üµÄË²¼ä
+        // ï¿½ï¿½ï¿½ï¿½É¿ï¿½ S ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½
         bool isCrouchUp = wasCrouchingLastFrame && !isCrouching;
         wasCrouchingLastFrame = isCrouching;
 
         string targetState = currentState;
-        float targetSpeed = 1f; // Ä¬ÈÏÎª 1 (ÕýÏò)
+        float targetSpeed = 1f; // Ä¬ï¿½ï¿½Îª 1 (ï¿½ï¿½ï¿½ï¿½)
         float startNormalizedTime = float.NegativeInfinity;
 
-        // --- ×´Ì¬ÓÅÏÈ¼¶Âß¼­ ---
+        // --- ×´Ì¬ï¿½ï¿½ï¿½È¼ï¿½ï¿½ß¼ï¿½ ---
 
-        // 1. ³å´Ì»òÔÚ¿ÕÖÐ (´ò¶Ï¶×ÏÂ)
+        // 1. ï¿½ï¿½Ì»ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ (ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½)
         if (isDashing || !isGrounded)
         {
             isRecoveringFromCrouch = false;
             targetState = isDashing ? animDash : animIdle;
         }
-        // 2. ÕýÔÚ¶×ÏÂ
+        // 2. ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½
         else if (isCrouching)
         {
             isRecoveringFromCrouch = false;
             if (isMoving) targetState = animCrouchWalk;
             else targetState = animCrouch;
         }
-        // 3. ËÉ¿ª S ¼üµÄË²¼ä (´¥·¢µ¹·Å)
+        // 3. ï¿½É¿ï¿½ S ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
         else if (isCrouchUp && !isMoving)
         {
             isRecoveringFromCrouch = true;
             targetState = animCrouch;
-            targetSpeed = -1f; // ÉèÖÃµ¹·ÅËÙ¶È
-            startNormalizedTime = 1f; // ´ÓÎ²²¿¿ªÊ¼
+            targetSpeed = -1f; // ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+            startNormalizedTime = 1f; // ï¿½ï¿½Î²ï¿½ï¿½ï¿½ï¿½Ê¼
 
             StopAllCoroutines();
             StartCoroutine(FinishStandUpAnimation());
         }
-        // 4. ÆÕÍ¨×´Ì¬
+        // 4. ï¿½ï¿½Í¨×´Ì¬
         else
         {
             if (isMoving)
@@ -91,7 +91,7 @@ public class PlayerAnimation : MonoBehaviour
                 if (isRecoveringFromCrouch)
                 {
                     targetState = animCrouch;
-                    targetSpeed = -1f; // Î¬³Öµ¹·ÅËÙ¶È
+                    targetSpeed = -1f; // Î¬ï¿½Öµï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
                 }
                 else
                 {
@@ -105,13 +105,13 @@ public class PlayerAnimation : MonoBehaviour
 
     void ChangeAnimationState(string newState, float speed = 1f, float startNormalizedTime = float.NegativeInfinity)
     {
-        // --- ºËÐÄÐÞ¸Äµã ---
-        // ÎÒÃÇ²»ÔÙÐÞ¸Ä animator.speed£¬¶øÊÇÐÞ¸ÄÎÒÃÇÉèÖÃµÄ "PlaySpeed" ²ÎÊý
+        // --- ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Äµï¿½ ---
+        // ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½ animator.speedï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ "PlaySpeed" ï¿½ï¿½ï¿½ï¿½
         animator.SetFloat("PlaySpeed", speed);
-        // È·±£È«¾ÖËÙ¶ÈÊ¼ÖÕÎª 1£¬·ÀÖ¹±¨´í
+        // È·ï¿½ï¿½È«ï¿½ï¿½ï¿½Ù¶ï¿½Ê¼ï¿½ï¿½Îª 1ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½
         animator.speed = 1f;
 
-        // Ö»ÓÐ×´Ì¬¸Ä±ä£¬»òÕßÖØÐÂÐèÒª´ÓÍ·(»òÎ²)²¥·ÅÊ±²Åµ÷ÓÃ Play
+        // Ö»ï¿½ï¿½×´Ì¬ï¿½Ä±ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Í·(ï¿½ï¿½Î²)ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Åµï¿½ï¿½ï¿½ Play
         bool isStateChanged = currentState != newState;
         bool isForcedRestart = !float.IsNegativeInfinity(startNormalizedTime);
 
@@ -142,7 +142,7 @@ public class PlayerAnimation : MonoBehaviour
             length = info.length;
         }
 
-        // µÈ´ýµ¹·Å½áÊø
+        // ï¿½È´ï¿½ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(length);
 
         isRecoveringFromCrouch = false;
