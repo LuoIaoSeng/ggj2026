@@ -1,96 +1,129 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private LayerMask groundMask;
-    [SerializeField] private float speed = 5;
-    [SerializeField] private float jumpForce = 8;
-    [SerializeField] private float dashDistance = 5;
-    public bool grounded;
-    public bool enableInput = true;
-    public int direction = 1;
-    public bool dashed = false;
-    void Update()
-    {
-        if (!enableInput)
-            return;
-        var groundHit = Physics2D.OverlapCircle(transform.position, 0.01f, groundMask);
-        if (groundHit)
-        {
-            grounded = true;
-        }
-        else
-        {
-            grounded = false;
-        }
-        var moveVector = InputController.MoveVector;
-        if (moveVector.x > 0)
-        {
-            direction = 1;
-        }
-        else if (moveVector.x < 0)
-        {
-            direction = -1;
-        }
-        if (InputController.Squat)
-        {
-            if (groundHit)
-            {
-                var twoWayStructure = groundHit.GetComponent<TwoWayStructure>();
-                if (twoWayStructure)
-                {
-                    twoWayStructure.ToggleCollider(false);
-                }
-            }
-        }
-        if (InputController.Jump)
-        {
-            Jump();
-        }
+    [Header("Movement Settings")]
+    [Tooltip("走路速度")]
+    public float walkSpeed = 5f;
+    [Tooltip("跳跃力度")]
+    public float jumpForce = 10f;
+    [Tooltip("下蹲时的速度倍率 (0-1)")]
+    public float crouchSpeedMultiplier = 0.5f;
 
-    }
-    void FixedUpdate()
+    [Header("Detection Settings")]
+    [Tooltip("角色脚底")]
+    public Transform groundCheck;
+    [Tooltip("角色头顶")]
+    public Transform ceilingCheck;
+    public float checkRadius = 0.2f;
+    [Tooltip("地面/障碍物图层")]
+    public LayerMask groundLayer;
+
+    [Header("State")]
+    [SerializeField] private bool isInputEnabled = true;
+
+    // 对外公开状态，供 Animation 脚本读取
+    public bool IsCrouching { get; private set; }
+    public bool IsGrounded { get; private set; }
+
+    private Rigidbody2D rb;
+
+    private void Awake()
     {
-        if (!enableInput)
+        rb = GetComponent<Rigidbody2D>();
+        // --- 修改点 2: 删除了所有 Collider 变量和获取代码 ---
+    }
+
+    private void Update()
+    {
+        if (!isInputEnabled)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
             return;
+        }
+        HandleInput();
+    }
+
+    private void FixedUpdate()
+    {
+        CheckSurroundings();
         Move();
     }
-    void Move()
+
+    private void HandleInput()
     {
-        if (InputController.Dash && !dashed)
+        // 跳跃逻辑
+        if (Input.GetKeyDown(KeyCode.W) && IsGrounded && !IsCrouching)
         {
-            Dash();
-        }
-        else
-        {
-            transform.position = transform.position + new Vector3(InputController.MoveVector.x * speed * Time.deltaTime, 0, 0);
-        }
-    }
-    async void Dash()
-    {
-        if (dashed)
-            return;
-        // if (Physics2D.Raycast(transform.position, Vector2.right * direction, dashDistance + 0.5f, groundMask))
-        //     return;
-        transform
-            .DOMoveX(transform.position.x + dashDistance * direction, 0.3f)
-            .SetEase(Ease.Linear);
-        dashed = true;
-        await Task.Delay(1000);
-        dashed = false;
-    }
-    void Jump()
-    {
-        if (grounded)
-        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            grounded = false;
+        }
+
+        // --- 修改点 3: 只计算状态，不修改碰撞体 ---
+        bool wantsToCrouch = Input.GetKey(KeyCode.S);
+
+        // 头顶检测逻辑：如果松开S但头顶有东西，保持蹲下
+        //if (!wantsToCrouch && IsCrouching)
+        //{
+        //    if (Physics2D.OverlapCircle(ceilingCheck.position, checkRadius, groundLayer))
+        //    {
+        //        wantsToCrouch = true;
+        //    }
+        //}
+        if (!wantsToCrouch && IsCrouching)
+        {
+            // 把原来的 Physics2D.OverlapCircle 改成这样来调试：
+            Collider2D hit = Physics2D.OverlapCircle(ceilingCheck.position, checkRadius, groundLayer);
+            if (hit != null)
+            {
+                Debug.Log("头顶检测到了障碍物：" + hit.name); // <--- 看控制台输出什么名字
+                wantsToCrouch = true;
+            }
+        }
+
+        // 更新状态
+        IsCrouching = wantsToCrouch;
+
+        // --- 修改点 4: 删除了 PerformCrouch() 调用 ---
+    }
+
+    private void Move()
+    {
+        if (!isInputEnabled) return;
+
+        float moveInput = 0f;
+        if (Input.GetKey(KeyCode.A)) moveInput = -1f;
+        if (Input.GetKey(KeyCode.D)) moveInput = 1f;
+
+        float currentSpeed = walkSpeed;
+        if (IsCrouching) currentSpeed *= crouchSpeedMultiplier;
+
+        rb.velocity = new Vector2(moveInput * currentSpeed, rb.velocity.y);
+
+        if (moveInput > 0) transform.localScale = new Vector3(1, 1, 1);
+        else if (moveInput < 0) transform.localScale = new Vector3(-1, 1, 1);
+    }
+
+    private void CheckSurroundings()
+    {
+        IsGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+        }
+        if (ceilingCheck != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(ceilingCheck.position, checkRadius);
         }
     }
 }
