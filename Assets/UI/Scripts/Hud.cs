@@ -19,11 +19,6 @@ public class HUD : MonoBehaviour
 
         redObjects = GameObject.FindGameObjectsWithTag("R");
 
-        foreach (var gameObject in redObjects)
-        {
-            Debug.Log(gameObject.GetComponent<SpriteRenderer>());
-        }
-
         screenFilter = GameObject.Find("ScreenFilter").GetComponent<ScreenFilter>();
 
         VisualElement root = hud.rootVisualElement;
