@@ -127,6 +127,8 @@ public class PlayerAnimation : MonoBehaviour
                 animator.Play(newState);
             }
         }
+
+        //Debug.Log("≥¢ ‘«–ªªµΩ∂Øª≠: " + newState);
     }
 
     IEnumerator FinishStandUpAnimation()
