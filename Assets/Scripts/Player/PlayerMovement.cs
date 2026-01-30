@@ -7,26 +7,26 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [Tooltip("×ßÂ·ËÙ¶È")]
+    [Tooltip("ï¿½ï¿½Â·ï¿½Ù¶ï¿½")]
     public float walkSpeed = 5f;
-    [Tooltip("ÌøÔ¾Á¦¶È")]
+    [Tooltip("ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½")]
     public float jumpForce = 10f;
-    [Tooltip("ÏÂ¶×Ê±µÄËÙ¶È±¶ÂÊ (0-1)")]
+    [Tooltip("ï¿½Â¶ï¿½Ê±ï¿½ï¿½ï¿½Ù¶È±ï¿½ï¿½ï¿½ (0-1)")]
     public float crouchSpeedMultiplier = 0.5f;
 
     [Header("Detection Settings")]
-    [Tooltip("½ÇÉ«½Åµ×")]
+    [Tooltip("ï¿½ï¿½É«ï¿½Åµï¿½")]
     public Transform groundCheck;
-    [Tooltip("½ÇÉ«Í·¶¥")]
+    [Tooltip("ï¿½ï¿½É«Í·ï¿½ï¿½")]
     public Transform ceilingCheck;
     public float checkRadius = 0.2f;
-    [Tooltip("µØÃæ/ÕÏ°­ÎïÍ¼²ã")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½/ï¿½Ï°ï¿½ï¿½ï¿½Í¼ï¿½ï¿½")]
     public LayerMask groundLayer;
 
     [Header("State")]
     [SerializeField] public bool isInputEnabled = true;
 
-    // ¶ÔÍâ¹«¿ª×´Ì¬£¬¹© Animation ½Å±¾¶ÁÈ¡
+    // ï¿½ï¿½ï¿½â¹«ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ Animation ï¿½Å±ï¿½ï¿½ï¿½È¡
     public bool IsCrouching { get; private set; }
     public bool IsGrounded { get; private set; }
 
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // --- ÐÞ¸Äµã 2: É¾³ýÁËËùÓÐ Collider ±äÁ¿ºÍ»ñÈ¡´úÂë ---
+        // --- ï¿½Þ¸Äµï¿½ 2: É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Collider ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ ---
     }
 
     private void Update()
@@ -56,17 +56,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleInput()
     {
-        // ÌøÔ¾Âß¼­
+        // ï¿½ï¿½Ô¾ï¿½ß¼ï¿½
         if (Input.GetKeyDown(KeyCode.W) && IsGrounded && !IsCrouching)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        // --- ÐÞ¸Äµã 3: Ö»¼ÆËã×´Ì¬£¬²»ÐÞ¸ÄÅö×²Ìå ---
+        // --- ï¿½Þ¸Äµï¿½ 3: Ö»ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½ï¿½ï¿½×²ï¿½ï¿½ ---
         bool wantsToCrouch = Input.GetKey(KeyCode.S);
 
-        // Í·¶¥¼ì²âÂß¼­£ºÈç¹ûËÉ¿ªSµ«Í·¶¥ÓÐ¶«Î÷£¬±£³Ö¶×ÏÂ
+        // Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¿ï¿½Sï¿½ï¿½Í·ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½
         //if (!wantsToCrouch && IsCrouching)
         //{
         //    if (Physics2D.OverlapCircle(ceilingCheck.position, checkRadius, groundLayer))
@@ -74,21 +74,33 @@ public class PlayerMovement : MonoBehaviour
         //        wantsToCrouch = true;
         //    }
         //}
+        if (wantsToCrouch)
+        {
+            Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+            if (hit)
+            {
+                var twoWayStructure = hit.GetComponent<TwoWayStructure>();
+                if (twoWayStructure)
+                {
+                    twoWayStructure.ToggleCollider(false);
+                }
+            }
+        }
         if (!wantsToCrouch && IsCrouching)
         {
-            // °ÑÔ­À´µÄ Physics2D.OverlapCircle ¸Ä³ÉÕâÑùÀ´µ÷ÊÔ£º
+            // ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ Physics2D.OverlapCircle ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½
             Collider2D hit = Physics2D.OverlapCircle(ceilingCheck.position, checkRadius, groundLayer);
             if (hit != null)
             {
-                Debug.Log("Í·¶¥¼ì²âµ½ÁËÕÏ°­Îï£º" + hit.name); // <--- ¿´¿ØÖÆÌ¨Êä³öÊ²Ã´Ãû×Ö
+                Debug.Log("Í·ï¿½ï¿½ï¿½ï¿½âµ½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï£º" + hit.name); // <--- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½ï¿½
                 wantsToCrouch = true;
             }
         }
 
-        // ¸üÐÂ×´Ì¬
+        // ï¿½ï¿½ï¿½ï¿½×´Ì¬
         IsCrouching = wantsToCrouch;
 
-        // --- ÐÞ¸Äµã 4: É¾³ýÁË PerformCrouch() µ÷ÓÃ ---
+        // --- ï¿½Þ¸Äµï¿½ 4: É¾ï¿½ï¿½ï¿½ï¿½ PerformCrouch() ï¿½ï¿½ï¿½ï¿½ ---
     }
 
     private void Move()
