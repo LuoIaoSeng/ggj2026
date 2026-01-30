@@ -235,7 +235,7 @@ MonoBehaviour:
   checkRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   isInputEnabled: 1
 --- !u!95 &1135865964851255826
 Animator:
