@@ -54,3 +54,9 @@ TagManager:
   - name: Player
     uniqueID: 33093257
     locked: 0
+  - name: Lift
+    uniqueID: 2541224939
+    locked: 0
+  - name: Arrow
+    uniqueID: 920780345
+    locked: 0
