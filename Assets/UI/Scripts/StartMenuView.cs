@@ -1,6 +1,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class StartMenuView
@@ -26,6 +27,10 @@ public class StartMenuView
 #else
         Application.Quit(); // Quits the built application
 #endif
+        };
+        startButton.clicked += () =>
+        {
+            SceneManager.LoadScene("Level01");
         };
     }
 

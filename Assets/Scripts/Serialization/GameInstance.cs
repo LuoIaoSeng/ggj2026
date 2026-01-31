@@ -42,6 +42,12 @@ public class GameInstance : MonoBehaviour
         }
     }
 
+    public void UpdateSettings()
+    {
+        var pair = gameData.resolution.Split('x');
+        Screen.SetResolution(int.Parse(pair[0]), int.Parse(pair[1]), gameData.fullscreen);
+    }
+
     public void SaveData()
     {
         // 添加时间戳
