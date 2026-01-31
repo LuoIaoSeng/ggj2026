@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class EnemyB : Enemy
@@ -5,9 +7,11 @@ public class EnemyB : Enemy
     [SerializeField] protected Animator animator;
     [SerializeField] public float speed = 2f;
 
-    // ¶¯»­×´Ì¬Ãû³Æ
+    // ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½
     private const string ANIM_WALK_RIGHT = "WalkRight";
     private const string ANIM_WALK_LEFT = "WalkLeft";
+
+    [SerializeField] private List<SpriteRenderer> coverEnemySprite;
 
     protected override void Start()
     {
@@ -15,19 +19,35 @@ public class EnemyB : Enemy
         mask = "blue";
         direction = 1;
 
-        // È·±£Ã»ÓÐÐý×ª¸ÉÈÅ
+        // È·ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
         enemyObject.rotation = Quaternion.identity;
+        enemyObject.DOMoveX(EndPoint1.position.x, 0);
 
-        // ³õÊ¼¶¯»­
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
         PlayMoveAnimation();
     }
 
     void Update()
     {
-        // 1. ´¿´âµÄÒÆ¶¯Âß¼­
+        // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ß¼ï¿½
         enemyObject.position += Vector3.right * direction * Time.deltaTime * speed;
 
-        // 2. ´¿´âµÄ×ªÏòÅÐ¶Ï
+        if (isIgnore(playerAbility))
+        {
+            foreach (var sprite in coverEnemySprite)
+            {
+                sprite.DOFade(1, 0);
+            }
+        }
+        else
+        {
+            foreach (var sprite in coverEnemySprite)
+            {
+                sprite.DOFade(0, 0);
+            }
+        }
+
+        // 2. ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Ð¶ï¿½
         if (enemyObject.position.x > EndPoint2.position.x && direction == 1)
         {
             TurnAround(-1);
@@ -41,7 +61,7 @@ public class EnemyB : Enemy
     private void TurnAround(int newDirection)
     {
         direction = newDirection;
-        // 3. ×´Ì¬¸Ä±äÊ±£¬Ö±½ÓÇÐ»»¶¯»­£¬¼òµ¥Ã÷ÁË
+        // 3. ×´Ì¬ï¿½Ä±ï¿½Ê±ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         PlayMoveAnimation();
     }
 
