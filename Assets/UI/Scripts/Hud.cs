@@ -6,6 +6,7 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] private UIDocument hud;
     [SerializeField] private ScreenFilter screenFilter;
+    [SerializeField] private PlayerAbility playerAbility;
     Button redButton;
     Button greenButton;
     Button blueButton;
@@ -13,11 +14,14 @@ public class HUD : MonoBehaviour
     public int abilityDuration;
     public int abilityCooldown;
     GameObject[] redObjects;
-
+    GameObject[] greenObjects;
+    GameObject[] blueObjects;
     void Start()
     {
 
         redObjects = GameObject.FindGameObjectsWithTag("R");
+        // greenObjects = GameObject.FindGameObjectsWithTag("G");
+        // blueObjects = GameObject.FindGameObjectsWithTag("B");
 
         screenFilter = GameObject.Find("ScreenFilter").GetComponent<ScreenFilter>();
 
@@ -50,19 +54,9 @@ public class HUD : MonoBehaviour
         for (int i = duration; i > 0; i--)
         {
             screenFilter.TransitionColor(new Vector4(color.x, color.y, color.z, i / 20.0f), 1);
-            button.text = $"{i}";
             await Task.Delay(1000);
         }
         screenFilter.TransitionColor(new Vector4(1, 0, 0, 0), 1);
-        button.RemoveFromClassList("active");
-        isTriggering = false;
-
-        button.AddToClassList("cooldown");
-        for (int i = cooldown; i > 0; i--)
-        {
-            button.text = $"{i}";
-            await Task.Delay(1000);
-        }
 
         foreach (var gameObject in gameObjects)
         {
@@ -70,20 +64,37 @@ public class HUD : MonoBehaviour
             var originColor = spriteRenderer.color;
             spriteRenderer.color = new Color(originColor.r, originColor.g, originColor.b, 1);
         }
+        button.RemoveFromClassList("active");
+        isTriggering = false;
+
+        button.AddToClassList("cooldown");
+        for (int i = cooldown; i > 0; i--)
+        {
+            await Task.Delay(1000);
+        }
         button.text = originalText;
         button.RemoveFromClassList("cooldown");
     }
 
-    public void TriggerRed()
+    public async void TriggerRed()
     {
+        playerAbility.ignoreRed = true;
         Trigger(redButton, new Vector3(1, 0, 0), redObjects, abilityDuration, abilityCooldown);
+        await Task.Delay(abilityDuration * 1000);
+        playerAbility.ignoreRed = false;
     }
-    public void TriggerGreen()
+    public async void TriggerGreen()
     {
-        Trigger(greenButton, new Vector3(0, 1, 0), redObjects, abilityDuration, abilityCooldown);
+        playerAbility.ignoreGreen = true;
+        Trigger(greenButton, new Vector3(0, 1, 0), greenObjects, abilityDuration, abilityCooldown);
+        await Task.Delay(abilityDuration * 1000);
+        playerAbility.ignoreGreen = false;
     }
-    public void TriggerBlue()
+    public async void TriggerBlue()
     {
-        Trigger(blueButton, new Vector3(0, 0, 1), redObjects, abilityDuration, abilityCooldown);
+        playerAbility.ignoreBlue = true;
+        Trigger(blueButton, new Vector3(0, 0, 1), blueObjects, abilityDuration, abilityCooldown);
+        await Task.Delay(abilityDuration * 1000);
+        playerAbility.ignoreBlue = false;
     }
 }

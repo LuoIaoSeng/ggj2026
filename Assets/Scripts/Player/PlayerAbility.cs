@@ -29,23 +29,14 @@ public class PlayerAbility : MonoBehaviour
         if (InputController.RedKeyDown)
         {
             hud.TriggerRed();
-            ignoreRed = true;
-            await Task.Delay(duration * 1000);
-            ignoreRed = false;
         }
         if (InputController.BlueKeyDown)
         {
             hud.TriggerBlue();
-            ignoreBlue = true;
-            await Task.Delay(duration * 1000);
-            ignoreBlue = false;
         }
         if (InputController.GreenKeyDown)
         {
             hud.TriggerGreen();
-            ignoreGreen = true;
-            await Task.Delay(duration * 1000);
-            ignoreGreen = false;
         }
     }
 }
