@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 716751951902555260}
   - component: {fileID: 2977535623168349781}
   - component: {fileID: 2910729539496232279}
+  - component: {fileID: 4506560421470075917}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -298,3 +299,16 @@ MonoBehaviour:
   ignoreRed: 0
   ignoreGreen: 0
   ignoreBlue: 0
+--- !u!114 &4506560421470075917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7723118898239484635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71d06bff4150d74f961b2f9e9adab27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectedItemIds: []
