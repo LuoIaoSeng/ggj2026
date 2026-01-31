@@ -1,28 +1,26 @@
+using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Transform EndPoint1;
-    [SerializeField] private Transform EndPoint2;
-    [SerializeField] private Transform sprite;
-    [SerializeField] private Transform raycastStartPoint;
-    private int direction = 1;
+    [SerializeField] protected Transform EndPoint1;
+    [SerializeField] protected Transform EndPoint2;
+    [SerializeField] protected Transform sprite;
+    [SerializeField] protected Transform raycastStartPoint;
+    protected Camera playerCamera;
+    protected PlayerMovement playerMovement;
+    protected int direction = 1;
+    protected RaycastHit2D hit;
     public bool hitPlayer = false;
     public string mask;
-    void Start()
+    public bool IsTurn { get; protected set; }
+    protected virtual void Start()
     {
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         sprite.position = EndPoint1.position;
-        sprite
-            .DOMove(EndPoint2.position, 2)
-            .SetEase(Ease.Linear)
-            .SetLoops(-1, LoopType.Yoyo).OnStepComplete(() =>
-            {
-                sprite.DORotate(new Vector3(0, sprite.rotation.eulerAngles.y + 180, 0), 0);
-                direction *= -1;
-            });
     }
-    bool isIgnore(PlayerAbility playerAbility)
+    protected bool isIgnore(PlayerAbility playerAbility)
     {
         switch (mask)
         {
@@ -35,9 +33,9 @@ public class Enemy : MonoBehaviour
         }
         return false;
     }
-    void Update()
+    protected virtual void Update()
     {
-        var hit = Physics2D.Raycast(raycastStartPoint.position, Vector3.right * direction, 10f);
+        IsTurn = false;
         if (hit)
         {
             if (hit.collider.tag == "Player")
@@ -45,24 +43,41 @@ public class Enemy : MonoBehaviour
                 var playerAbility = hit.collider.GetComponent<PlayerAbility>();
                 if (!isIgnore(playerAbility) && !hitPlayer)
                 {
-                    var playerMovement = hit.collider.GetComponent<PlayerMovement>();
-                    var rb = hit.collider.GetComponent<Rigidbody2D>();
-                    playerMovement.enableInput = false;
-                    rb.velocity = Vector2.zero;
-                    var camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-                    camera.DOOrthoSize(5, 1);
-                    sprite.DOPause();
-                    hitPlayer = true;
+                    HitPlayer();
                 }
             }
         }
     }
-    void OnDrawGizmos()
+    protected void Restart()
     {
-        // Set the color of the gizmo before drawing (optional)
-        Gizmos.color = Color.red;
+        var checkpoints = FindObjectsOfType<Checkpoint>();
+        foreach (var checkpoint in checkpoints)
+        {
+            if (checkpoint.checkpointIndex == GameInstance.Instance.gameData.checkpoint)
+            {
+                playerCamera.DOOrthoSize(15, 1).WaitForCompletion();
+                playerMovement.transform.DOMove(checkpoint.transform.position, 1);
+                break;
+            }
+        }
+        sprite.DOPlay();
+        playerMovement.enableInput = true;
+        hitPlayer = false;
+    }
+    protected async void HitPlayer()
+    {
+        playerMovement = hit.collider.GetComponent<PlayerMovement>();
+        var rb = hit.collider.GetComponent<Rigidbody2D>();
 
-        // Draw the line between the specified start and end points
-        Gizmos.DrawLine(raycastStartPoint.position, raycastStartPoint.position + Vector3.right * direction * 10f);
+        playerMovement.enableInput = false;
+        hitPlayer = true;
+
+        rb.velocity = Vector2.zero;
+        playerCamera.DOOrthoSize(5, 1);
+        sprite.DOPause();
+
+        await Task.Delay(1000);
+
+        Restart();
     }
 }

@@ -12,9 +12,13 @@ public class Lift : MonoBehaviour
     [SerializeField] private Transform lift;
     private Collider2D player;
     private bool isMoving = false;
+
+    private ItemRequirement itemRequirement;
+
     void Start()
     {
         floor = initFloor;
+        itemRequirement = GetComponent<ItemRequirement>();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -31,6 +35,12 @@ public class Lift : MonoBehaviour
     {
         if (InputController.Interact && player && !isMoving)
         {
+            if (itemRequirement != null && !itemRequirement.CheckAccess(player.gameObject))
+            {
+                // 这里可以加一些反馈，比如播放“嘟嘟”的报错音效
+                return;
+            }
+
             var playerMovement = player.GetComponent<PlayerMovement>();
             var rb = playerMovement.GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
