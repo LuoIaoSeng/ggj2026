@@ -1,27 +1,44 @@
+using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 public class EnemyR : Enemy
 {
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] public float speed;
+    private bool isAnimating = false;
     protected override void Start()
     {
         base.Start();
         mask = "red";
 
-        sprite
-            .DOMove(EndPoint2.position, 2)
-            .SetEase(Ease.Linear)
-            .SetLoops(-1, LoopType.Yoyo)
-            .OnStepComplete(() =>
-            {
-                sprite.DORotate(new Vector3(0, sprite.rotation.eulerAngles.y + 180, 0), 0);
-                direction *= -1;
-                IsTurn = true;
-            });
+        enemyObject.rotation = Quaternion.Euler(0, 0, 0);
+        direction = 1;
     }
-
-    protected override void Update()
+    async void Update()
     {
-        base.Update();
-        hit = Physics2D.Raycast(raycastStartPoint.position, Vector3.right * direction, 10f);
+        if (!isAnimating)
+        {
+            enemyObject.position += Vector3.right * direction * Time.deltaTime * speed;
+        }
+        if (enemyObject.position.x > EndPoint2.position.x && !isAnimating)
+        {
+            animator.SetBool("isStopping", true);
+            isAnimating = true;
+            direction *= -1;
+            await Task.Delay(2683);
+            animator.SetBool("isStopping", false);
+            enemyObject.rotation = Quaternion.Euler(new Vector3(0, 180 * (direction == -1 ? 1 : 0), 0));
+            isAnimating = false;
+        } else if(enemyObject.position.x < EndPoint1.position.x && !isAnimating)
+        {
+            animator.SetBool("isStopping", true);
+            isAnimating = true;
+            direction *= -1;
+            await Task.Delay(2683);
+            animator.SetBool("isStopping", false);
+            enemyObject.rotation = Quaternion.Euler(new Vector3(0, 180 * (direction == -1 ? 1 : 0), 0));
+            isAnimating = false;
+        }
     }
 }

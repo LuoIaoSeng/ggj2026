@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
+using DG.Tweening;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
@@ -13,10 +13,6 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 5f;
     [Tooltip("跳跃力度")]
     public float jumpForce = 10f;
-    [Tooltip("冲刺距离")]
-    public float dashDistance = 10f;
-    [Tooltip("冲刺CD")]
-    public int dashCoolDown = 5;
     [Tooltip("下蹲移动速度百分比")]
     public float crouchSpeedMultiplier = 0.5f;
 
@@ -29,12 +25,14 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("地面层")]
     public LayerMask groundLayer;
 
+    //HoHo
     [Header("State")]
     [SerializeField] public bool enableInput = true;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     public bool IsCrouching { get; private set; }
     public bool IsGrounded { get; private set; }
+    public bool IsDashing {get;set;}
     private Rigidbody2D rb;
     public int direction = 1;
     public bool canDash = true;
@@ -66,8 +64,10 @@ public class PlayerMovement : MonoBehaviour
         if(InputController.Dash && canDash)
         {
             canDash = false;
-            rb.DOMoveX(transform.position.x + direction * dashDistance, 0.5f);
-            await Task.Delay(dashCoolDown * 1000);
+            IsDashing = true;
+            rb.DOMoveX(transform.position.x + direction * 5, 0.5f)
+              .OnComplete(() => IsDashing = false);
+            await Task.Delay(1 * 1000);
             canDash = true;
         }
         if (InputController.Jump && IsGrounded && !IsCrouching)

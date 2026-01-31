@@ -6,19 +6,18 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected Transform EndPoint1;
     [SerializeField] protected Transform EndPoint2;
-    [SerializeField] protected Transform sprite;
-    [SerializeField] protected Transform raycastStartPoint;
+    [SerializeField] protected Transform enemyObject;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
     protected Camera playerCamera;
     protected PlayerMovement playerMovement;
     protected int direction = 1;
-    protected RaycastHit2D hit;
     public bool hitPlayer = false;
     public string mask;
     public bool IsTurn { get; protected set; }
     protected virtual void Start()
     {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        sprite.position = EndPoint1.position;
+        // enemyObject.position = EndPoint1.position;
     }
     protected bool isIgnore(PlayerAbility playerAbility)
     {
@@ -33,21 +32,6 @@ public class Enemy : MonoBehaviour
         }
         return false;
     }
-    protected virtual void Update()
-    {
-        IsTurn = false;
-        if (hit)
-        {
-            if (hit.collider.tag == "Player")
-            {
-                var playerAbility = hit.collider.GetComponent<PlayerAbility>();
-                if (!isIgnore(playerAbility) && !hitPlayer)
-                {
-                    HitPlayer();
-                }
-            }
-        }
-    }
     protected void Restart()
     {
         var checkpoints = FindObjectsOfType<Checkpoint>();
@@ -60,21 +44,46 @@ public class Enemy : MonoBehaviour
                 break;
             }
         }
-        sprite.DOPlay();
+        enemyObject.DOPlay();
         playerMovement.enableInput = true;
         hitPlayer = false;
     }
-    protected async void HitPlayer()
-    {
-        playerMovement = hit.collider.GetComponent<PlayerMovement>();
-        var rb = hit.collider.GetComponent<Rigidbody2D>();
 
-        playerMovement.enableInput = false;
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        HandleCollision(collision.gameObject);
+    }
+
+    private void HandleCollision(GameObject obj)
+    {
+        if (hitPlayer) return;
+
+        if (obj.CompareTag("Player"))
+        {
+            var ability = obj.GetComponent<PlayerAbility>();
+
+            if (ability != null && isIgnore(ability))
+            {
+                return;
+            }
+
+            KillPlayer(obj);
+        }
+    }
+
+    private async void KillPlayer(GameObject playerObj)
+    {
+        playerMovement = playerObj.GetComponent<PlayerMovement>();
+        var rb = playerObj.GetComponent<Rigidbody2D>();
+
         hitPlayer = true;
 
-        rb.velocity = Vector2.zero;
-        playerCamera.DOOrthoSize(5, 1);
-        sprite.DOPause();
+        if (playerMovement != null) playerMovement.enableInput = false;
+        if (rb != null) rb.velocity = Vector2.zero;
+
+        if (playerCamera != null) playerCamera.DOOrthoSize(5, 1);
+
+        if (enemyObject != null) enemyObject.DOPause();
 
         await Task.Delay(1000);
 
