@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -11,6 +13,10 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 5f;
     [Tooltip("跳跃力度")]
     public float jumpForce = 10f;
+    [Tooltip("冲刺距离")]
+    public float dashDistance = 10f;
+    [Tooltip("冲刺CD")]
+    public int dashCoolDown = 5;
     [Tooltip("下蹲移动速度百分比")]
     public float crouchSpeedMultiplier = 0.5f;
 
@@ -30,12 +36,8 @@ public class PlayerMovement : MonoBehaviour
     public bool IsCrouching { get; private set; }
     public bool IsGrounded { get; private set; }
     private Rigidbody2D rb;
-<<<<<<< Updated upstream
-=======
     public int direction = 1;
     public bool canDash = true;
-    public bool IsDashing { get; private set; }
->>>>>>> Stashed changes
 
     private void Start()
     {
@@ -59,20 +61,15 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
-    private void HandleInput()
+    private async void HandleInput()
     {
-<<<<<<< Updated upstream
-=======
         if(InputController.Dash && canDash)
         {
             canDash = false;
-            IsDashing = true;
-            rb.DOMoveX(transform.position.x + direction * dashDistance, 0.5f)
-              .OnComplete(() => IsDashing = false);
+            rb.DOMoveX(transform.position.x + direction * dashDistance, 0.5f);
             await Task.Delay(dashCoolDown * 1000);
             canDash = true;
         }
->>>>>>> Stashed changes
         if (InputController.Jump && IsGrounded && !IsCrouching)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -112,10 +109,12 @@ public class PlayerMovement : MonoBehaviour
         if (moveVector.x > 0)
         {
             spriteRenderer.flipX = false;
+            direction = 1;
         }
         else if (moveVector.x < 0)
         {
             spriteRenderer.flipX = true;
+            direction = -1;
         }
 
         float currentSpeed = walkSpeed;
