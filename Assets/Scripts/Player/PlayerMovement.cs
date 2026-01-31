@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
@@ -33,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public int direction = 1;
     public bool canDash = true;
-    public bool IsDashing { get; private set; }
 
     private void Start()
     {
@@ -57,15 +58,15 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
-    private void HandleInput()
+    private async void HandleInput()
     {
         if(InputController.Dash && canDash)
         {
             canDash = false;
             IsDashing = true;
-            rb.DOMoveX(transform.position.x + direction * dashDistance, 0.5f)
+            rb.DOMoveX(transform.position.x + direction * 5, 0.5f)
               .OnComplete(() => IsDashing = false);
-            await Task.Delay(dashCoolDown * 1000);
+            await Task.Delay(1 * 1000);
             canDash = true;
         }
         if (InputController.Jump && IsGrounded && !IsCrouching)
