@@ -10,9 +10,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     [Tooltip("移动速度")]
-    public float walkSpeed = 5f;
+    public float walkSpeed = 15f;
     [Tooltip("跳跃力度")]
-    public float jumpForce = 10f;
+    public float jumpForce = 15f;
     [Tooltip("下蹲移动速度百分比")]
     public float crouchSpeedMultiplier = 0.5f;
 
@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("地面层")]
     public LayerMask groundLayer;
 
-    //HoHo
     [Header("State")]
     [SerializeField] public bool enableInput = true;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -44,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        IsGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+        IsGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius + 0.5f, groundLayer);
         if (!enableInput)
         {
             return;
