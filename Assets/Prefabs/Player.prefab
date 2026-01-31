@@ -76,8 +76,8 @@ GameObject:
   - component: {fileID: 475275087933857503}
   - component: {fileID: 1135865964851255826}
   - component: {fileID: 716751951902555260}
-  - component: {fileID: 2910729539496232279}
   - component: {fileID: 2977535623168349781}
+  - component: {fileID: 2910729539496232279}
   - component: {fileID: 4506560421470075917}
   m_Layer: 0
   m_Name: Player
@@ -252,7 +252,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   jumpForce: 10
-  dashForce: 10
   crouchSpeedMultiplier: 0.5
   groundCheck: {fileID: 403383775439554223}
   ceilingCheck: {fileID: 7747886352430944589}
@@ -262,26 +261,6 @@ MonoBehaviour:
     m_Bits: 64
   enableInput: 1
   spriteRenderer: {fileID: 6611831795035323701}
-  direction: 1
---- !u!114 &2910729539496232279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7723118898239484635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b0d815d7c811e44bb62bb1b89f21376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hud: {fileID: 0}
-  playerMovement: {fileID: 716751951902555260}
-  duration: 5
-  cooldown: 2
-  ignoreRed: 0
-  ignoreGreen: 0
-  ignoreBlue: 0
 --- !u!114 &2977535623168349781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +280,25 @@ MonoBehaviour:
   animDash: Dash
   dashKey: 304
   moveThreshold: 0.1
+--- !u!114 &2910729539496232279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7723118898239484635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0d815d7c811e44bb62bb1b89f21376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hud: {fileID: 0}
+  playerMovement: {fileID: 716751951902555260}
+  duration: 5
+  cooldown: 2
+  ignoreRed: 0
+  ignoreGreen: 0
+  ignoreBlue: 0
 --- !u!114 &4506560421470075917
 MonoBehaviour:
   m_ObjectHideFlags: 0
