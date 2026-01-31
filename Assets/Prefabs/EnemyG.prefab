@@ -113,7 +113,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.701881, y: 8.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -156,7 +156,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 7.701881, y: 8.8}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 7.701881, y: 8.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EndPoint1: {fileID: 0}
   EndPoint2: {fileID: 0}
-  sprite: {fileID: 0}
-  raycastStartPoint: {fileID: 0}
+  enemyObject: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   hitPlayer: 0
   mask: 
 --- !u!95 &6659603941012297785

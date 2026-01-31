@@ -37,11 +37,7 @@ public class PlayerAnimation : MonoBehaviour
     void Update()
     {
         bool isMoving = Mathf.Abs(rb.velocity.x) > moveThreshold;
-<<<<<<< Updated upstream
-        bool isDashing = Input.GetKey(dashKey);
-=======
         bool isDashing = movement.IsDashing;
->>>>>>> Stashed changes
 
         bool isCrouching = movement.IsCrouching;
         bool isGrounded = movement.IsGrounded;
