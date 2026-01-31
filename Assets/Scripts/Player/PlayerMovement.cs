@@ -108,10 +108,12 @@ public class PlayerMovement : MonoBehaviour
         if (moveVector.x > 0)
         {
             spriteRenderer.flipX = false;
+            direction = 1;
         }
         else if (moveVector.x < 0)
         {
             spriteRenderer.flipX = true;
+            direction = -1;
         }
 
         float currentSpeed = walkSpeed;
