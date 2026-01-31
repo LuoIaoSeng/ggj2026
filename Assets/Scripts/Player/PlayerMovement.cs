@@ -40,7 +40,9 @@ public class PlayerMovement : MonoBehaviour
     {
         IsGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
         if (!enableInput)
+        {
             return;
+        }
         HandleInput();
     }
 
@@ -92,7 +94,8 @@ public class PlayerMovement : MonoBehaviour
         if (moveVector.x > 0)
         {
             spriteRenderer.flipX = false;
-        }else if(moveVector.x < 0)
+        }
+        else if (moveVector.x < 0)
         {
             spriteRenderer.flipX = true;
         }
