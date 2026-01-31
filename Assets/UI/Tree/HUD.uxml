@@ -2,13 +2,13 @@
     <Style src="project://database/Assets/UI/Uss/hud.uss?fileID=7433441132597879392&amp;guid=a4f0babec776ecc49ad4747548bcf042&amp;type=3#hud" />
     <ui:VisualElement name="container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Arts/UI/hudui.png?fileID=21300000&amp;guid=5370f118c563db949a7ee3292c97e8d4&amp;type=3#hudui&quot;);">
         <ui:VisualElement name="button-list" style="flex-grow: 0;">
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="r-button" style="background-color: rgba(188, 188, 188, 0);">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="r-button" focusable="false" style="background-color: rgba(188, 188, 188, 0);">
                 <ui:VisualElement style="background-image: url(&quot;project://database/Assets/Shader/CameraRenderTexture.renderTexture?fileID=8400000&amp;guid=1a17dbb6e4b1b83429e311e67246159b&amp;type=2#CameraRenderTexture&quot;); -unity-background-image-tint-color: rgb(255, 0, 0); background-color: rgb(0, 0, 0);" />
             </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="g-button" style="background-color: rgba(188, 188, 188, 0);">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="g-button" focusable="false" style="background-color: rgba(188, 188, 188, 0);">
                 <ui:VisualElement style="background-image: url(&quot;project://database/Assets/Shader/CameraRenderTexture.renderTexture?fileID=8400000&amp;guid=1a17dbb6e4b1b83429e311e67246159b&amp;type=2#CameraRenderTexture&quot;); -unity-background-image-tint-color: rgb(10, 255, 0); background-color: rgb(0, 0, 0);" />
             </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="b-button" style="background-color: rgba(188, 188, 188, 0);">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="b-button" focusable="false" style="background-color: rgba(188, 188, 188, 0);">
                 <ui:VisualElement style="background-image: url(&quot;project://database/Assets/Shader/CameraRenderTexture.renderTexture?fileID=8400000&amp;guid=1a17dbb6e4b1b83429e311e67246159b&amp;type=2#CameraRenderTexture&quot;); -unity-background-image-tint-color: rgb(54, 108, 255); background-color: rgb(0, 0, 0);" />
             </ui:Button>
         </ui:VisualElement>

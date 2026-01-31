@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected SpriteRenderer spriteRenderer;
     protected Camera playerCamera;
     protected PlayerMovement playerMovement;
+    protected PlayerAbility playerAbility;
     protected int direction = 1;
     public bool hitPlayer = false;
     public string mask;
@@ -17,7 +18,9 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        // enemyObject.position = EndPoint1.position;
+        var player = GameObject.FindObjectOfType<PlayerMovement>();
+        playerMovement = player.GetComponent<PlayerMovement>();
+        playerAbility = player.GetComponent<PlayerAbility>();
     }
     protected bool isIgnore(PlayerAbility playerAbility)
     {
@@ -60,7 +63,7 @@ public class Enemy : MonoBehaviour
 
         if (obj.CompareTag("Player"))
         {
-            var ability = obj.GetComponent<PlayerAbility>();
+            var ability = playerAbility;
 
             if (ability != null && isIgnore(ability))
             {
@@ -73,7 +76,6 @@ public class Enemy : MonoBehaviour
 
     private async void KillPlayer(GameObject playerObj)
     {
-        playerMovement = playerObj.GetComponent<PlayerMovement>();
         var rb = playerObj.GetComponent<Rigidbody2D>();
 
         hitPlayer = true;

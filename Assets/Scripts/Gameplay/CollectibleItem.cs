@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class CollectibleItem : MonoBehaviour
@@ -6,6 +7,11 @@ public class CollectibleItem : MonoBehaviour
     [Header("Settings")]
     [Tooltip("该物品的唯一ID，例如 'LiftCard_Level1'")]
     public string uniqueId;
+
+    void Start()
+    {
+        transform.DOMove(Vector3.up + transform.position, 2).SetEase(Ease.InOutCubic).SetLoops(-1, LoopType.Yoyo);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

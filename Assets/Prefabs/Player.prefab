@@ -123,7 +123,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 52b04c9ead13fe74997bd8452aea8f6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -252,7 +252,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   jumpForce: 10
-  dashForce: 10
   crouchSpeedMultiplier: 0.5
   groundCheck: {fileID: 403383775439554223}
   ceilingCheck: {fileID: 7747886352430944589}
@@ -263,6 +262,7 @@ MonoBehaviour:
   enableInput: 1
   spriteRenderer: {fileID: 6611831795035323701}
   direction: 1
+  canDash: 1
 --- !u!114 &2910729539496232279
 MonoBehaviour:
   m_ObjectHideFlags: 0
