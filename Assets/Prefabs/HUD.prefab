@@ -48,7 +48,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 90b89689e0909f641a0b66cb9f4ddcff, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: c5a7b5c4ee20e7148bb91f59a03189d9, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!114 &7520015843154975213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,3 +63,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hud: {fileID: 523899505578699422}
   screenFilter: {fileID: 0}
+  playerAbility: {fileID: 0}
+  abilityDuration: 0
+  abilityCooldown: 0
