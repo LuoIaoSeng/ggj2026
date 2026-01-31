@@ -37,10 +37,8 @@ public class PlayerAnimation : MonoBehaviour
 
     void Update()
     {
-        if (!movement.enableInput)
-            return;
         bool isMoving = Mathf.Abs(rb.velocity.x) > moveThreshold;
-        bool isDashing = InputController.Dash;
+        bool isDashing = Input.GetKey(dashKey);
 
         // 锟斤拷取锟竭硷拷锟斤拷状态
         bool isCrouching = movement.IsCrouching;
