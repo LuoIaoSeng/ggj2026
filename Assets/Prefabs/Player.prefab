@@ -252,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   jumpForce: 10
-  crouchSpeedMultiplier: 100
+  crouchSpeedMultiplier: 0.5
   groundCheck: {fileID: 403383775439554223}
   ceilingCheck: {fileID: 7747886352430944589}
   checkRadius: 0.2
@@ -260,6 +260,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   enableInput: 1
+  inputExceptionKeys: 
   spriteRenderer: {fileID: 6611831795035323701}
   direction: 1
   canDash: 1
