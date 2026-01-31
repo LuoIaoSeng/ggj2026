@@ -20,8 +20,8 @@ public class HUD : MonoBehaviour
     {
 
         redObjects = GameObject.FindGameObjectsWithTag("R");
-        // greenObjects = GameObject.FindGameObjectsWithTag("G");
-        // blueObjects = GameObject.FindGameObjectsWithTag("B");
+        greenObjects = GameObject.FindGameObjectsWithTag("G");
+        blueObjects = GameObject.FindGameObjectsWithTag("B");
 
         screenFilter = GameObject.Find("ScreenFilter").GetComponent<ScreenFilter>();
 

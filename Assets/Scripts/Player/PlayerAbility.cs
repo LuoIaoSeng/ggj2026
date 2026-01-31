@@ -22,7 +22,7 @@ public class PlayerAbility : MonoBehaviour
         ignoreRed = ignoreGreen = ignoreBlue = false;
     }
 
-    async void Update()
+    void Update()
     {
         if (!playerMovement.enableInput)
             return;

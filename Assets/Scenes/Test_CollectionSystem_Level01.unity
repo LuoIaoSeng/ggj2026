@@ -4232,11 +4232,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 173678305907129754, guid: 3f686ed12bceef04498035e982033a4d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -54.8
+      value: -57.69
       objectReference: {fileID: 0}
     - target: {fileID: 173678305907129754, guid: 3f686ed12bceef04498035e982033a4d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.02
+      value: -28.7
       objectReference: {fileID: 0}
     - target: {fileID: 173678305907129754, guid: 3f686ed12bceef04498035e982033a4d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12974,11 +12974,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &1128882033 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2390803174475889998, guid: ffd2d47857f4ae044b440181d5cc3bd0, type: 3}
-  m_PrefabInstance: {fileID: 1926135034}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1139830017
 GameObject:
   m_ObjectHideFlags: 0
@@ -18703,8 +18698,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: TwoWay
       objectReference: {fileID: 0}
+    - target: {fileID: 4192078508151588363, guid: a0ad094e1ecfa0b45b7d366ed9aae17b, type: 3}
+      propertyPath: m_Points.Array.data[0].x
+      value: -4.276779
+      objectReference: {fileID: 0}
+    - target: {fileID: 4192078508151588363, guid: a0ad094e1ecfa0b45b7d366ed9aae17b, type: 3}
+      propertyPath: m_Points.Array.data[0].y
+      value: -3.5626278
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6862641526396423183, guid: a0ad094e1ecfa0b45b7d366ed9aae17b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0ad094e1ecfa0b45b7d366ed9aae17b, type: 3}
@@ -21856,6 +21860,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyR
       objectReference: {fileID: 0}
+    - target: {fileID: 5962719993145016301, guid: ffd2d47857f4ae044b440181d5cc3bd0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: 5962719993145016301, guid: ffd2d47857f4ae044b440181d5cc3bd0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6234293116153212198, guid: ffd2d47857f4ae044b440181d5cc3bd0, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -21879,7 +21891,7 @@ PrefabInstance:
     - target: {fileID: 7062945753188282728, guid: ffd2d47857f4ae044b440181d5cc3bd0, type: 3}
       propertyPath: raycastStartPoint
       value: 
-      objectReference: {fileID: 1128882033}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
