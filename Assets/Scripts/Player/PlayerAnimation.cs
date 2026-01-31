@@ -7,9 +7,9 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     [Header("Animation State Names")]
-    public string animIdle = "Stand";
+    public string animIdle = "Stand"; 
     public string animWalk = "Walk";
-    public string animCrouch = "Crouch"; // 确锟斤拷锟斤拷锟斤拷 Animator 锟斤勾选锟斤拷锟斤拷锟阶刺拷锟?Speed Multiplier
+    public string animCrouch = "Crouch";
     public string animCrouchWalk = "CrouchWalk";
     public string animDash = "Dash";
 
@@ -31,38 +31,30 @@ public class PlayerAnimation : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         movement = GetComponent<PlayerMovement>();
 
-        // 锟斤拷始锟斤拷确锟斤拷锟劫度诧拷锟斤拷锟斤拷锟斤拷
-        animator.speed = 1f; // 强锟斤拷锟斤拷锟斤拷全锟斤拷锟劫讹拷为锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+        animator.speed = 1f;
     }
 
     void Update()
     {
-        if (!movement.enableInput)
-            return;
         bool isMoving = Mathf.Abs(rb.velocity.x) > moveThreshold;
-        // bool isDashing = InputController.Dash;  <-- 删除这行
-        bool isDashing = movement.IsDashing;    // <-- 改成这行
-        // 锟斤拷取锟竭硷拷锟斤拷状态
+        bool isDashing = movement.IsDashing;
+
         bool isCrouching = movement.IsCrouching;
         bool isGrounded = movement.IsGrounded;
 
-        // 锟斤拷锟斤拷煽锟?S 锟斤拷锟斤拷瞬锟斤拷
         bool isCrouchUp = wasCrouchingLastFrame && !isCrouching;
         wasCrouchingLastFrame = isCrouching;
 
         string targetState = currentState;
-        float targetSpeed = 1f; // 默锟斤拷为 1 (锟斤拷锟斤拷)
+        float targetSpeed = 1f;
         float startNormalizedTime = float.NegativeInfinity;
 
-        // --- 状态锟斤拷锟饺硷拷锟竭硷拷 ---
 
-        // 1. 锟斤拷袒锟斤拷诳锟斤拷锟?(锟斤拷隙锟斤拷锟?
         if (isDashing || !isGrounded)
         {
             isRecoveringFromCrouch = false;
             targetState = isDashing ? animDash : animIdle;
         }
-        // 2. 锟斤拷锟节讹拷锟斤拷
         else if (isCrouching)
         {
             isRecoveringFromCrouch = false;
@@ -84,18 +76,16 @@ public class PlayerAnimation : MonoBehaviour
                 }
             }
         }
-        // 3. 锟缴匡拷 S 锟斤拷锟斤拷瞬锟斤拷 (锟斤拷锟斤拷锟斤拷锟斤拷)
         else if (isCrouchUp && !isMoving)
         {
             isRecoveringFromCrouch = true;
             targetState = animCrouch;
-            targetSpeed = -1f; // 锟斤拷锟矫碉拷锟斤拷锟劫讹拷
-            startNormalizedTime = 1f; // 锟斤拷尾锟斤拷锟斤拷始
+            targetSpeed = -1f;
+            startNormalizedTime = 1f;
 
             StopAllCoroutines();
             StartCoroutine(FinishStandUpAnimation());
         }
-        // 4. 锟斤拷通状态
         else
         {
             if (isMoving)
@@ -108,7 +98,7 @@ public class PlayerAnimation : MonoBehaviour
                 if (isRecoveringFromCrouch)
                 {
                     targetState = animCrouch;
-                    targetSpeed = -1f; // 维锟街碉拷锟斤拷锟劫讹拷
+                    targetSpeed = -1f;
                 }
                 else
                 {
@@ -122,13 +112,9 @@ public class PlayerAnimation : MonoBehaviour
 
     void ChangeAnimationState(string newState, float speed = 1f, float startNormalizedTime = float.NegativeInfinity)
     {
-        // --- 锟斤拷锟斤拷锟睫改碉拷 ---
-        // 锟斤拷锟角诧拷锟斤拷锟睫革拷 animator.speed锟斤拷锟斤拷锟斤拷锟睫革拷锟斤拷锟斤拷锟斤拷锟矫碉拷 "PlaySpeed" 锟斤拷锟斤拷
         animator.SetFloat("PlaySpeed", speed);
-        // 确锟斤拷全锟斤拷锟劫讹拷始锟斤拷为 1锟斤拷锟斤拷止锟斤拷锟斤拷
         animator.speed = 1f;
 
-        // 只锟斤拷状态锟侥变，锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷要锟斤拷头(锟斤拷尾)锟斤拷锟斤拷时锟脚碉拷锟斤拷 Play
         bool isStateChanged = currentState != newState;
         bool isForcedRestart = !float.IsNegativeInfinity(startNormalizedTime);
 
@@ -159,7 +145,6 @@ public class PlayerAnimation : MonoBehaviour
             length = info.length;
         }
 
-        // 锟饺达拷锟斤拷锟脚斤拷锟斤拷
         yield return new WaitForSeconds(length);
 
         isRecoveringFromCrouch = false;
