@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        enemyObject.position = EndPoint1.position;
+        // enemyObject.position = EndPoint1.position;
     }
     protected bool isIgnore(PlayerAbility playerAbility)
     {
