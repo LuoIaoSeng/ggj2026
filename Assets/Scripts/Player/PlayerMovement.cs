@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,73 +7,59 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [Tooltip("��·�ٶ�")]
+    [Tooltip("移动速度")]
     public float walkSpeed = 5f;
-    [Tooltip("��Ծ����")]
+    [Tooltip("跳跃力度")]
     public float jumpForce = 10f;
-    [Tooltip("�¶�ʱ���ٶȱ��� (0-1)")]
+    [Tooltip("下蹲移动速度百分比")]
     public float crouchSpeedMultiplier = 0.5f;
 
     [Header("Detection Settings")]
-    [Tooltip("��ɫ�ŵ�")]
+    [Tooltip("地面检测物体")]
     public Transform groundCheck;
-    [Tooltip("��ɫͷ��")]
+    [Tooltip("顶部检测物体")]
     public Transform ceilingCheck;
     public float checkRadius = 0.2f;
-    [Tooltip("����/�ϰ���ͼ��")]
+    [Tooltip("地面层")]
     public LayerMask groundLayer;
 
     [Header("State")]
-    [SerializeField] public bool isInputEnabled = true;
+    [SerializeField] public bool enableInput = true;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
-    // ���⹫��״̬���� Animation �ű���ȡ
     public bool IsCrouching { get; private set; }
     public bool IsGrounded { get; private set; }
-
     private Rigidbody2D rb;
 
-    private void Awake()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // --- �޸ĵ� 2: ɾ�������� Collider �����ͻ�ȡ���� ---
     }
 
     private void Update()
     {
-        if (!isInputEnabled)
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
+        IsGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+        if (!enableInput)
             return;
-        }
         HandleInput();
     }
 
     private void FixedUpdate()
     {
-        CheckSurroundings();
+        if (!enableInput)
+            return;
         Move();
     }
 
     private void HandleInput()
     {
-        // ��Ծ�߼�
-        if (Input.GetKeyDown(KeyCode.W) && IsGrounded && !IsCrouching)
+        if (InputController.Jump && IsGrounded && !IsCrouching)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        // --- �޸ĵ� 3: ֻ����״̬�����޸���ײ�� ---
         bool wantsToCrouch = Input.GetKey(KeyCode.S);
 
-        // ͷ������߼�������ɿ�S��ͷ���ж��������ֶ���
-        //if (!wantsToCrouch && IsCrouching)
-        //{
-        //    if (Physics2D.OverlapCircle(ceilingCheck.position, checkRadius, groundLayer))
-        //    {
-        //        wantsToCrouch = true;
-        //    }
-        //}
         if (wantsToCrouch)
         {
             Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
@@ -88,41 +74,33 @@ public class PlayerMovement : MonoBehaviour
         }
         if (!wantsToCrouch && IsCrouching)
         {
-            // ��ԭ���� Physics2D.OverlapCircle �ĳ����������ԣ�
             Collider2D hit = Physics2D.OverlapCircle(ceilingCheck.position, checkRadius, groundLayer);
             if (hit != null)
             {
-                Debug.Log("ͷ����⵽���ϰ��" + hit.name); // <--- ������̨���ʲô����
                 wantsToCrouch = true;
             }
         }
 
-        // ����״̬
         IsCrouching = wantsToCrouch;
-
-        // --- �޸ĵ� 4: ɾ���� PerformCrouch() ���� ---
     }
 
     private void Move()
     {
-        if (!isInputEnabled) return;
 
-        float moveInput = 0f;
-        if (Input.GetKey(KeyCode.A)) moveInput = -1f;
-        if (Input.GetKey(KeyCode.D)) moveInput = 1f;
+        var moveVector = InputController.MoveVector;
+
+        if (moveVector.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }else if(moveVector.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
 
         float currentSpeed = walkSpeed;
         if (IsCrouching) currentSpeed *= crouchSpeedMultiplier;
 
-        rb.velocity = new Vector2(moveInput * currentSpeed, rb.velocity.y);
-
-        if (moveInput > 0) transform.localScale = new Vector3(1, 1, 1);
-        else if (moveInput < 0) transform.localScale = new Vector3(-1, 1, 1);
-    }
-
-    private void CheckSurroundings()
-    {
-        IsGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+        rb.velocity = new Vector2(moveVector.x * currentSpeed, rb.velocity.y);
     }
 
     private void OnDrawGizmos()

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1182b42a5cf20664b90e374f3d2cfea8
+guid: 4de640613fb8fe141837a52b5a2726ab
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,11 +43,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -95,106 +95,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Crouch_2_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1440
-        width: 460
-        height: 480
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45c7f62a7ace5dc49ad204750a05ba52
-      internalID: 1959856246
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crouch_2_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 960
-        width: 460
-        height: 480
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40e50c05954c93e4398d94b088360704
-      internalID: 584368218
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crouch_2_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 480
-        width: 460
-        height: 480
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc5409a602333dd46b66f3524c36d7e5
-      internalID: 1276457078
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crouch_2_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 460
-        height: 480
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8996f48e7e544644095224106b77458e
-      internalID: 1686936785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Crouch_2_0: 1959856246
-      Crouch_2_1: 584368218
-      Crouch_2_2: 1276457078
-      Crouch_2_3: 1686936785
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

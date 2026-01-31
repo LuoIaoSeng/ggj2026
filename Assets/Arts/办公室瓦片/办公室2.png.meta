@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1f53e7054731e8340bc21a17076c2f0d
+guid: f35df799c171c5b46a78dba7b8b1a9b3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -95,70 +95,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Walk_3_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 480
-        width: 440
-        height: 480
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4ba765c264c3247428e52d07e966a078
-      internalID: 1381400198
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walk_3_1
-      rect:
-        serializedVersion: 2
-        x: 440
-        y: 480
-        width: 440
-        height: 480
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1c789663c31c0404ab6f3d9b5f26634c
-      internalID: 465158062
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walk_3_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 440
-        height: 480
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aeca669ea303b204dacc94b5b0882b44
-      internalID: -1658901542
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -169,10 +106,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Walk_3_0: 1381400198
-      Walk_3_1: 465158062
-      Walk_3_2: -1658901542
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
