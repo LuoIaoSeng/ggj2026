@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Arts/Animation/Player/animDash.anim.meta
 guid: f3c1939539237bc4fbf4caa3beceba93
+========
+guid: b39ad54ac61b773438c9fdb414d07b68
+>>>>>>>> master:Assets/Arts/Animation/Enemys/Red.controller.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 7400000
