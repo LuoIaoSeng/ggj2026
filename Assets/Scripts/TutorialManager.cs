@@ -23,30 +23,45 @@ public class TutorialManager : MonoBehaviour
     private bool isInDialogue = false;
     private Queue<string> currentDialogueLines = new Queue<string>();
 
+    // 用来记录图标应该钉在世界里的哪个位置
+    private Vector3 targetWorldPos;
+    // 开关：是否需要更新图标位置
+    private bool isTrackingPos = false;
+    // 缓存摄像机，提升性能
+    private Camera mainCamera;
+
     void Awake()
     {
-        // 单例模式，方便触发器调用
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
 
     void Start()
     {
-        // 初始化UI状态
         if (promptPanel) promptPanel.SetActive(false);
         if (dialoguePanel) dialoguePanel.SetActive(false);
 
-        // 如果没有手动拖拽玩家，自动查找
         if (playerMovement == null)
             playerMovement = FindObjectOfType<PlayerMovement>();
+
+        // 获取主摄像机
+        mainCamera = Camera.main;
+        if (mainCamera == null) mainCamera = FindObjectOfType<Camera>();
     }
 
     void Update()
     {
-        // --- 需求2：对话模式下的逻辑 ---
+        // --- 1. 图标位置跟随逻辑 (新增) ---
+        if (isTrackingPos && promptPanel.activeSelf && mainCamera != null)
+        {
+            // 核心魔法：将 3D/2D 世界坐标转换为屏幕上的 2D 像素坐标
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(targetWorldPos);
+            promptPanel.transform.position = screenPos;
+        }
+
+        // --- 2. 对话逻辑 ---
         if (isInDialogue)
         {
-            // 在对话模式下，只响应空格键（Space）进入下一句
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 DisplayNextSentence();
@@ -54,64 +69,51 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    // ================== 需求1：动态提示图标 ==================
-
-    /// <summary>
-    /// 显示操作提示（不打断玩家）
-    /// </summary>
-    /// <param name="icon">要显示的按键图标</param>
-    public void ShowPrompt(Sprite icon)
+    // --- 修改了这里：增加了 worldPos 参数 ---
+    public void ShowPrompt(Sprite icon, Vector3 worldPos)
     {
         if (promptPanel != null && promptImage != null)
         {
             promptImage.sprite = icon;
-            promptImage.SetNativeSize(); // 保持图片原比例
+            promptImage.SetNativeSize();
+
+            // 记录目标位置，并开启跟随
+            targetWorldPos = worldPos;
+            isTrackingPos = true;
+
             promptPanel.SetActive(true);
         }
     }
 
-    /// <summary>
-    /// 隐藏操作提示
-    /// </summary>
     public void HidePrompt()
     {
         if (promptPanel != null)
+        {
+            isTrackingPos = false; // 停止跟随计算
             promptPanel.SetActive(false);
+        }
     }
 
-    // ================== 需求2：剧情对话 ==================
-
-    /// <summary>
-    /// 开始一段对话（禁用玩家输入）
-    /// </summary>
-    /// <param name="lines">对话内容的数组</param>
+    // ... 下面是原本的对话代码，保持不变 ...
     public void StartDialogue(string[] lines)
     {
         if (lines == null || lines.Length == 0) return;
 
         isInDialogue = true;
 
-        // 1. 禁用玩家操作
         if (playerMovement != null)
         {
             playerMovement.enableInput = false;
-
-            // 关键：将玩家速度归零，防止带着惯性滑行
             Rigidbody2D rb = playerMovement.GetComponent<Rigidbody2D>();
             if (rb != null) rb.velocity = Vector2.zero;
-
-            // 如果有动画组件，这里最好也设为 Idle，例如：
-            // playerMovement.GetComponent<Animator>().Play("Stand");
         }
 
-        // 2. 初始化对话队列
         currentDialogueLines.Clear();
         foreach (string line in lines)
         {
             currentDialogueLines.Enqueue(line);
         }
 
-        // 3. 打开UI并显示第一句
         dialoguePanel.SetActive(true);
         DisplayNextSentence();
     }
@@ -123,7 +125,6 @@ public class TutorialManager : MonoBehaviour
             EndDialogue();
             return;
         }
-
         string line = currentDialogueLines.Dequeue();
         dialogueText.text = line;
     }
@@ -132,8 +133,6 @@ public class TutorialManager : MonoBehaviour
     {
         isInDialogue = false;
         dialoguePanel.SetActive(false);
-
-        // 恢复玩家操作
         if (playerMovement != null)
         {
             playerMovement.enableInput = true;
