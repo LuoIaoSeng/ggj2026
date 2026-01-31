@@ -14,6 +14,8 @@ public class EnemyR : Enemy
 
         enemyObject.rotation = Quaternion.Euler(0, 0, 0);
         direction = 1;
+
+        transform.DOMoveX(EndPoint1.position.x, 0);
     }
     async void Update()
     {
