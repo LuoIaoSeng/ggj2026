@@ -252,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   jumpForce: 10
-  crouchSpeedMultiplier: 0.5
+  crouchSpeedMultiplier: 100
   groundCheck: {fileID: 403383775439554223}
   ceilingCheck: {fileID: 7747886352430944589}
   checkRadius: 0.2
