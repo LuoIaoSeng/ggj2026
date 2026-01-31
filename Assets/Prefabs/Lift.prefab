@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7348852127243139399}
   - component: {fileID: 4431664448971138374}
   - component: {fileID: 4308293163731219319}
+  - component: {fileID: 6237996313399382444}
   m_Layer: 0
   m_Name: Lift
   m_TagString: Untagged
@@ -54,7 +55,7 @@ MonoBehaviour:
   floor: 1
   dir: down
   initFloor: 1
-  liftSprite: {fileID: 6661837372783035883}
+  lift: {fileID: 0}
 --- !u!61 &4308293163731219319
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -100,6 +101,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.185665, y: 6.978752}
   m_EdgeRadius: 0
+--- !u!114 &6237996313399382444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4165695505607887306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e27b90a4fea2a9469eca941da8e7da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredItemId: 
 --- !u!1 &5702191999275181699
 GameObject:
   m_ObjectHideFlags: 0
