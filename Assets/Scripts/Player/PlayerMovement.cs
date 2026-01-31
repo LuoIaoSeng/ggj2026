@@ -30,6 +30,12 @@ public class PlayerMovement : MonoBehaviour
     public bool IsCrouching { get; private set; }
     public bool IsGrounded { get; private set; }
     private Rigidbody2D rb;
+<<<<<<< Updated upstream
+=======
+    public int direction = 1;
+    public bool canDash = true;
+    public bool IsDashing { get; private set; }
+>>>>>>> Stashed changes
 
     private void Start()
     {
@@ -55,6 +61,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleInput()
     {
+<<<<<<< Updated upstream
+=======
+        if(InputController.Dash && canDash)
+        {
+            canDash = false;
+            IsDashing = true;
+            rb.DOMoveX(transform.position.x + direction * dashDistance, 0.5f)
+              .OnComplete(() => IsDashing = false);
+            await Task.Delay(dashCoolDown * 1000);
+            canDash = true;
+        }
+>>>>>>> Stashed changes
         if (InputController.Jump && IsGrounded && !IsCrouching)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
