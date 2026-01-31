@@ -61,6 +61,11 @@ public class Enemy : MonoBehaviour
     {
         if (hitPlayer) return;
 
+        if (TutorialManager.Instance != null && TutorialManager.Instance.isInDialogue)
+        {
+            return;
+        }
+
         if (obj.CompareTag("Player"))
         {
             var ability = playerAbility;

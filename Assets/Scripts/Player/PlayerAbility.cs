@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerAbility : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] private HUD hud;
     [SerializeField] private PlayerMovement playerMovement;
     public int duration = 5;
@@ -13,9 +12,12 @@ public class PlayerAbility : MonoBehaviour
     public bool ignoreRed;
     public bool ignoreGreen;
     public bool ignoreBlue;
+
     void Start()
     {
-        hud = GameObject.Find("HUD").GetComponent<HUD>();
+        if (GameObject.Find("HUD") != null)
+            hud = GameObject.Find("HUD").GetComponent<HUD>();
+
         hud.abilityDuration = duration;
         hud.abilityCooldown = cooldown;
 
@@ -24,19 +26,35 @@ public class PlayerAbility : MonoBehaviour
 
     void Update()
     {
-        if (!playerMovement.enableInput)
+        // 基础检查：如果完全禁用且白名单为空，直接返回
+        if (!playerMovement.enableInput && (playerMovement.inputExceptionKeys == null || playerMovement.inputExceptionKeys.Count == 0))
             return;
+
+        // R 键检查：直接调用 PlayerMovement 里的判断方法
         if (InputController.RedKeyDown)
         {
-            hud.TriggerRed();
+            if (playerMovement.IsKeyAllowed(KeyCode.R))
+            {
+                hud.TriggerRed();
+            }
         }
+
+        // B 键检查
         if (InputController.BlueKeyDown)
         {
-            hud.TriggerBlue();
+            if (playerMovement.IsKeyAllowed(KeyCode.B))
+            {
+                hud.TriggerBlue();
+            }
         }
+
+        // G 键检查
         if (InputController.GreenKeyDown)
         {
-            hud.TriggerGreen();
+            if (playerMovement.IsKeyAllowed(KeyCode.G))
+            {
+                hud.TriggerGreen();
+            }
         }
     }
 }
