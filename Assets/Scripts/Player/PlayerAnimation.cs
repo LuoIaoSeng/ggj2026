@@ -40,8 +40,8 @@ public class PlayerAnimation : MonoBehaviour
         if (!movement.enableInput)
             return;
         bool isMoving = Mathf.Abs(rb.velocity.x) > moveThreshold;
-        bool isDashing = InputController.Dash;
-
+        // bool isDashing = InputController.Dash;  <-- 删除这行
+        bool isDashing = movement.IsDashing;    // <-- 改成这行
         // 锟斤拷取锟竭硷拷锟斤拷状态
         bool isCrouching = movement.IsCrouching;
         bool isGrounded = movement.IsGrounded;

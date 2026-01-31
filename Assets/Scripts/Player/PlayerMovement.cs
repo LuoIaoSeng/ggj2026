@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsCrouching { get; private set; }
     public bool IsGrounded { get; private set; }
+    public bool IsDashing {get;set;}
     private Rigidbody2D rb;
     public int direction = 1;
     public bool canDash = true;
@@ -66,7 +67,14 @@ public class PlayerMovement : MonoBehaviour
         if(InputController.Dash && canDash)
         {
             canDash = false;
-            rb.DOMoveX(transform.position.x + direction * dashDistance, 0.5f);
+            
+            // 2. 冲刺开始：标记状态为 true
+            IsDashing = true; 
+
+            // 3. 修改这里：使用 OnComplete 在 0.5秒移动结束后把状态改回 false
+            rb.DOMoveX(transform.position.x + direction * dashDistance, 0.5f)
+              .OnComplete(() => IsDashing = false); 
+
             await Task.Delay(dashCoolDown * 1000);
             canDash = true;
         }
