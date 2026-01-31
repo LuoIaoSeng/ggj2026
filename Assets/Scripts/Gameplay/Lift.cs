@@ -9,7 +9,7 @@ public class Lift : MonoBehaviour
     [SerializeField] private int floor;
     [SerializeField] private string dir;
     [SerializeField] private int initFloor;
-    [SerializeField] private Transform liftSprite;
+    [SerializeField] private Transform lift;
     private Collider2D player;
     private bool isMoving = false;
     void Start()
@@ -51,7 +51,7 @@ public class Lift : MonoBehaviour
             .OnComplete(() =>
             {
                 playerMovement.transform.DOMoveY(floorTransforms[floor].position.y, 2);
-                liftSprite.transform.DOMoveY(floorTransforms[floor].position.y + 1.5f, 2).OnComplete(() =>
+                lift.transform.DOMoveY(floorTransforms[floor].position.y, 2).OnComplete(() =>
                 {
                     playerMovement.enableInput = true;
                     isMoving = false;
