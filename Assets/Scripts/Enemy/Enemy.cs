@@ -80,12 +80,4 @@ public class Enemy : MonoBehaviour
 
         Restart();
     }
-    void OnDrawGizmos()
-    {
-        // Set the color of the gizmo before drawing (optional)
-        Gizmos.color = Color.red;
-
-        // Draw the line between the specified start and end points
-        Gizmos.DrawLine(raycastStartPoint.position, raycastStartPoint.position + Vector3.right * direction * 10f);
-    }
 }
