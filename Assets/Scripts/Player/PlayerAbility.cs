@@ -7,6 +7,7 @@ public class PlayerAbility : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private HUD hud;
+    [SerializeField] private PlayerMovement playerMovement;
     public int duration = 5;
     public int cooldown = 2;
     public bool ignoreRed;
@@ -23,21 +24,23 @@ public class PlayerAbility : MonoBehaviour
 
     async void Update()
     {
-        if(InputController.RedKeyDown)
+        if (!playerMovement.enableInput)
+            return;
+        if (InputController.RedKeyDown)
         {
             hud.TriggerRed();
             ignoreRed = true;
             await Task.Delay(duration * 1000);
             ignoreRed = false;
         }
-        if(InputController.BlueKeyDown)
+        if (InputController.BlueKeyDown)
         {
             hud.TriggerBlue();
             ignoreBlue = true;
             await Task.Delay(duration * 1000);
             ignoreBlue = false;
         }
-        if(InputController.GreenKeyDown)
+        if (InputController.GreenKeyDown)
         {
             hud.TriggerGreen();
             ignoreGreen = true;
