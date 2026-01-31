@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("地面层")]
     public LayerMask groundLayer;
 
+    //HoHo
     [Header("State")]
     [SerializeField] public bool enableInput = true;
     [SerializeField] private SpriteRenderer spriteRenderer;
